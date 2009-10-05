@@ -25,6 +25,12 @@ module DataMapper
   module Is
     module Paginated
       
+      #--
+      # Constants
+      #++
+      
+      VERSION = '0.10.1'
+      
       ##
       # Plugin API.
       

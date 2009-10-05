@@ -1,16 +1,16 @@
 
 $:.unshift 'lib'
-require 'GEM_NAME'
+require 'dm-is-paginated'
 require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new "GEM_NAME", GEM_CLASS::VERSION do |p|
-  p.author = "GEM_AUTHOR"
-  p.email = "GEM_EMAIL"
-  p.summary = "GEM_DESCRIPTION"
-  p.url = "GEM_URL"
-  p.runtime_dependencies = []
+Echoe.new "dm-is-paginated", DataMapper::Is::Paginated::VERSION do |p|
+  p.author = "TJ Holowaychuk"
+  p.email = "tj@vision-media.ca"
+  p.summary = "DataMapper Pagination"
+  p.url = "http://github.com/visionmedia/dm-is-paginated"
+  p.runtime_dependencies = ['dm-core >=0.10.1']
 end
 
 Dir['tasks/**/*.rake'].sort.each { |f| load f }
