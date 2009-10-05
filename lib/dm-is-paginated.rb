@@ -44,10 +44,11 @@ module DataMapper
         #
         # === Examples
         #    
-        #   code
+        #   User.all.
         #
         
         def page current_page = 1, options = {}
+          options, current_page = current_page, 1 if current_page.is_a? Hash
           new_collection scoped_query({
             :limit => per_page = (options.delete(:per_page) || 6),
             :offset => (current_page - 1) * per_page,
