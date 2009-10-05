@@ -2,6 +2,10 @@
 # DataMapper::Is::Paginated
 
   Better paging solution for DataMapper for DM >= 0.10.1
+  
+# Examples
+
+  * Coming soon
 
 ## License
 
