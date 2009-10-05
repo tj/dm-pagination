@@ -41,7 +41,7 @@ module DataMapper
       module ClassMethods
         
         ##
-        # Page collection by _current_page_ number and _options_ provided.
+        # Page collection by the _current_ page number and _options_ provided.
         #
         # === Options
         #
@@ -53,11 +53,11 @@ module DataMapper
         #   User.all.
         #
         
-        def page current_page = 1, options = {}
-          options, current_page = current_page, 1 if current_page.is_a? Hash
+        def page current = 1, options = {}
+          options, current = current, 1 if current.is_a? Hash
           new_collection scoped_query({
             :limit => per_page = (options.delete(:per_page) || 6),
-            :offset => (current_page - 1) * per_page,
+            :offset => (current - 1) * per_page,
             :order => [:id.desc]
           }.merge(options))
         end
