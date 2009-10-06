@@ -54,15 +54,3 @@ describe DataMapper::Pagination do
     end
   end
 end
-
-# TODO: dm-aggregates for #count
-# TODO:   count needs the same query
-# TODO:   store pagination info / query in the paginated Collection
-# TODO:   @items.pager
-=begin
-  def order_by params
-    (params[:order] || []).map do |key, val|
-      DataMapper::Query::Operator.new self, key.to_sym
-    end
-  end
-=end
