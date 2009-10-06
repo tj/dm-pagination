@@ -13,9 +13,9 @@ describe DataMapper::Pager do
     end
     
     describe "when on the last page" do
-      it "should not render the 'Previous' page link" do
+      it "should not render the 'Next' page link" do
         markup = Item.page(4).pager.to_html
-        markup.should_not include('Previous')
+        markup.should_not include('Next')
       end
     end
   end
