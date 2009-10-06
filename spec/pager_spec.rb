@@ -9,6 +9,12 @@ describe DataMapper::Pager do
       it "should render a ul.pager list" do
         Item.page.pager.to_html.should include('<ul class="pager">')
       end
+      
+      it "should add the 'active' class to the current page link <li>" do
+        Item.page.pager.to_html.should include('li class="active">1<')
+        Item.page(2).pager.to_html.should include('li class="active">2<')
+        Item.page(3).pager.to_html.should include('li class="active">3<')
+      end
     end
     
     describe "when no pages are available" do
@@ -33,16 +39,16 @@ describe DataMapper::Pager do
     end
     
     describe "with the :size option set" do
+      it "should raise an error when given an even number" do
+        lambda { Item.page.pager.to_html :size => 2 }.should raise_error(ArgumentError, /must be an odd number/)
+      end
+      
       it "should render only the specified number of intermediate page links" do
         markup = Item.page.pager.to_html :size => 3
         markup.should include('>1<')
         markup.should include('>2<')
-        markup.should_not include('>3<')
+        markup.should include('>3<')
         markup.should_not include('>4<')
-      end
-      
-      it "should raise an error when given an even number" do
-        lambda { Item.page.pager.to_html :size => 2 }.should raise_error(ArgumentError, /must be an odd number/)
       end
     end
     
@@ -72,7 +78,7 @@ describe DataMapper::Pager do
         markup.should include('Next')
       end
       
-      it "should render some intermediate page links with ... twice" do
+      it "should render some intermediate page links with ... before and after" do
         markup = Item.page(5, :per_page => 2).pager.to_html :size => 3
         markup.should include('class="more">...<')
         markup.should include('>4<')
