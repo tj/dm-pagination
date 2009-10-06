@@ -7,21 +7,27 @@
 
 Page 1 for all items, defaulting to 6 per page:
     Item.page
+    // => [1, 2, 3, 4, 5, 6]
     
-Page 2 for all items, 6 per page:
+Page 2 for all items, 6 per page, with only 3 items remaining
     Item.page 2
+    // => [7, 8, 9]
     
-Page 5, 2 per page:
-    Item.page 5, :per_page => 2
+Page 3, 2 per page:
+    Item.page 3, :per_page => 2
+    // => [5, 6]
     
 Accessing the pager instance:
-    Item.page(2).pager
+    Item.page(1, :per_page => 4).pager
+    // => #<DataMapper::Pager:0x1610f20 @per_page=4, @next_page=2, @total_pages=3, @total=10, @current_page=1>
     
 Converting to HTML:
     Item.page(2).pager.to_html
+    // => "<div class=\"pager\">..."
     
 Alter the number of intermediate numbered links displayed, defaults to 7
     Item.page(2).pager.to_html(:size => 3)
+    // => "<div class=\"pager\">..."
     
 # Output
 
