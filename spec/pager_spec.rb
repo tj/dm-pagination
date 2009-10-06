@@ -29,7 +29,7 @@ describe DataMapper::Pager do
         markup.should_not include('Previous')
       end
       
-      it "should render some intermediate page links with ..." do
+      it "should render some intermediate page links with ... after" do
         markup = Item.page.pager.to_html :size => 3
         markup.should include('>1<')
         markup.should include('>2<')
@@ -78,7 +78,7 @@ describe DataMapper::Pager do
         markup.should include('First')
       end
       
-      it "should render some intermediate page links with ..." do
+      it "should render some intermediate page links with ... before" do
         markup = Item.page(4).pager.to_html :size => 3
         markup.should include('<ul class=\"pager\"><li class="more">...<')
         markup.should include('>2<')

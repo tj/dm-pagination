@@ -71,7 +71,7 @@ module DataMapper
     end
     
     def more position
-      # TODO: finish
+      return '' if position == :before && @offset == 0
       %(<li class="more">...</li>\n)
     end
     
