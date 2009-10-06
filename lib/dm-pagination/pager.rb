@@ -55,8 +55,11 @@ module DataMapper
     def to_html options = {}
       size = options.delete(:size) || 7
       return if total_pages <= 0
-
-      previous_link + '<ul class="pager">' + intermediate_links(size) + '</ul>' + next_link
+      offset = current_page < size ? 0 : 
+          total - current_page < size ?
+            total - size : 
+              current_page - size / 2 - 1
+      previous_link + '<ul class="pager">' + intermediate_links(size)[offset, size].join("\n") + '</ul>' + next_link
     end
     
     def link_to uri, contents = nil
@@ -69,7 +72,7 @@ module DataMapper
         (n == current_page ? 
           '<li class="active">%s</li>' : 
             '<li>%s</li>') % link_to(n)
-      }.join("\n")
+      }
     end
     
     def previous_link

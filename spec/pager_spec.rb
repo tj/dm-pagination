@@ -11,9 +11,9 @@ describe DataMapper::Pager do
       end
       
       it "should add the 'active' class to the current page link <li>" do
-        Item.page.pager.to_html.should include('li class="active">1<')
-        Item.page(2).pager.to_html.should include('li class="active">2<')
-        Item.page(3).pager.to_html.should include('li class="active">3<')
+        Item.page.pager.to_html.should include('li class="active"><a href="1">1<')
+        Item.page(2).pager.to_html.should include('li class="active"><a href="2">2<')
+        Item.page(3).pager.to_html.should include('li class="active"><a href="3">3<')
       end
     end
     
