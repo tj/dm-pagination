@@ -40,7 +40,7 @@ module DataMapper
       @per_page = options.delete :limit
       @current_page = options.delete :current_page
       @total_pages = (total.to_f / per_page.to_f).ceil
-      @next_page = current_page + 1 unless current_page >= @total_pages
+      @next_page = current_page + 1 unless current_page >= total_pages
       @previous_page = current_page - 1 unless current_page <= 1
     end
     
@@ -48,7 +48,8 @@ module DataMapper
     # Render the pager with the given _options_.
     
     def to_html options = {}
-      previous_link + '<ul class="pager">' + (1..@total_pages).map { |n|
+      return if total_pages <= 0
+      previous_link + '<ul class="pager">' + (1..total_pages).map { |n|
         '<li>%s</li>' % link_to(n)
       }.join("\n") + '</ul>' + next_link
     end

@@ -11,6 +11,12 @@ describe DataMapper::Pager do
       end
     end
     
+    describe "when no pages are available" do
+      it "should render nothing" do
+        Item.all(:id.lt => 1).page.pager.to_html.should be_nil
+      end
+    end
+    
     describe "when on the first page" do
       it "should not render the 'Previous' page link" do
         markup = Item.page.pager.to_html
