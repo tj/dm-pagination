@@ -23,12 +23,12 @@ describe DataMapper::Pager do
         markup.should_not include('Previous')
       end
       
-      it "should render some intermediate page links" do
-        markup = Item.page.pager.to_html
+      it "should render some intermediate page links with ..." do
+        markup = Item.page.pager.to_html :size => 3
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
-        markup.should include('>4<')
+        markup.should include('class="more">...<')
       end
     end
     
@@ -37,7 +37,7 @@ describe DataMapper::Pager do
         markup = Item.page.pager.to_html :size => 3
         markup.should include('>1<')
         markup.should include('>2<')
-        markup.should include('>3<')
+        markup.should_not include('>3<')
         markup.should_not include('>4<')
       end
     end
@@ -46,6 +46,14 @@ describe DataMapper::Pager do
       it "should not render the 'Next' page link" do
         markup = Item.page(4).pager.to_html
         markup.should_not include('Next')
+      end
+      
+      it "should render some intermediate page links with ..." do
+        markup = Item.page(4).pager.to_html :size => 3
+        markup.should include('class="more">...<')
+        markup.should include('>2<')
+        markup.should include('>3<')
+        markup.should include('>4<')
       end
     end
     
@@ -58,6 +66,15 @@ describe DataMapper::Pager do
       it "should render the 'Next' page link" do
         markup = Item.page(2).pager.to_html 
         markup.should include('Next')
+      end
+      
+      it "should render some intermediate page links with ... twice" do
+        markup = Item.page(5, :per_page => 2).pager.to_html :size => 3
+        markup.should include('class="more">...<')
+        markup.should include('>4<')
+        markup.should include('>5<')
+        markup.should include('>6<')
+        markup.should include('class="more">...<')
       end
     end
     
