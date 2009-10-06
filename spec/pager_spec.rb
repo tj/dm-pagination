@@ -34,7 +34,7 @@ describe DataMapper::Pager do
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
-        markup.should include('class="more">...<')
+        markup.should include('class="more">...</li></ul>')
       end
     end
     
@@ -60,7 +60,7 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ..." do
         markup = Item.page(4).pager.to_html :size => 3
-        markup.should include('class="more">...<')
+        markup.should include('<ul class=\"pager\"><li class="more">...<')
         markup.should include('>2<')
         markup.should include('>3<')
         markup.should include('>4<')
@@ -80,11 +80,11 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ... before and after" do
         markup = Item.page(5, :per_page => 2).pager.to_html :size => 3
-        markup.should include('class="more">...<')
+        markup.should include('<ul class=\"pager\"><li class="more">...<')
         markup.should include('>4<')
         markup.should include('>5<')
         markup.should include('>6<')
-        markup.should include('class="more">...<')
+        markup.should include('<li class=\"more\">...</li></ul>')
       end
     end
     

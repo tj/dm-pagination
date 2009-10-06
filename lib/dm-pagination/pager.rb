@@ -60,9 +60,9 @@ module DataMapper
             total - @size : 
               current_page - @size / 2 - 1
       previous_link + '<ul class="pager">' + 
-      more +
+      more(:before) +
       intermediate_links[@offset, @size].join("\n") + 
-      more +
+      more(:after) +
       '</ul>' + next_link
     end
     
@@ -70,8 +70,11 @@ module DataMapper
       %(<a href="#{uri}">#{contents || uri}</a>)
     end
     
-    def more 
-      ''
+    def more position
+      '<li class="more">...</li>' if begin
+          # TODO: finish
+          true
+        end || ''
     end
     
     def intermediate_links
