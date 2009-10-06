@@ -6,6 +6,11 @@
 # Examples
 
   * Coming soon
+  
+# Styling
+
+With CSS you may hide anything you wish to remove. There is
+no need to provide an API for this.
 
 ## License
 

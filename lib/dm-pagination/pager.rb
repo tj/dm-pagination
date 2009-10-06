@@ -67,7 +67,8 @@ module DataMapper
     end
     
     def link_to uri, contents = nil
-      %(<a href="#{uri}">#{contents || uri}</a>)
+      contents ||= uri
+      %(<a href="#{uri}" class="link-#{contents.to_s.downcase.tr(' ', '-')}">#{contents}</a>)
     end
     
     def more position

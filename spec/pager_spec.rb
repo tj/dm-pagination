@@ -11,9 +11,13 @@ describe DataMapper::Pager do
       end
       
       it "should add the 'active' class to the current page link <li>" do
-        Item.page.pager.to_html.should include('li class="active"><a href="1">1<')
-        Item.page(2).pager.to_html.should include('li class="active"><a href="2">2<')
-        Item.page(3).pager.to_html.should include('li class="active"><a href="3">3<')
+        Item.page.pager.to_html.should include('li class="active"><a href="1"')
+        Item.page(2).pager.to_html.should include('li class="active"><a href="2"')
+        Item.page(3).pager.to_html.should include('li class="active"><a href="3"')
+      end
+      
+      it "should add link-FOO classes to the anchor tag" do
+        Item.page.pager.to_html.should include('class="link-last">Last')
       end
     end
     
