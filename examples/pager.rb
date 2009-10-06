@@ -24,11 +24,13 @@ def show example
   end
 end
 
+puts "Items: #{Item.all.count}\n\n"
 show 'Item.page'
 show 'Item.page(2)'
 show 'Item.page(1, :per_page => 4)'
 show 'Item.page(1, :per_page => 4).pager'
 show 'Item.page(1, :per_page => 4).pager.to_html'
-show 'Item.page(1, :per_page => 4).pager.to_html(:size => 3)'
-show 'Item.page(2, :per_page => 4).pager.to_html(:size => 3)'
-show 'Item.page(3, :per_page => 4).pager.to_html(:size => 3)'
+show 'Item.page(1, :per_page => 2).pager.to_html(:size => 3)'
+show 'Item.page(2, :per_page => 2).pager.to_html(:size => 3)'
+show 'Item.page(3, :per_page => 2).pager.to_html(:size => 3)'
+show 'Item.page(4, :per_page => 2).pager.to_html(:size => 3)'
