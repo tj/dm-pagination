@@ -49,24 +49,21 @@ module DataMapper
     #
     # === Options
     #
-    #   :size   Number of intermediate page number links to be shown; Defaults to 6
+    #   :size   Number of intermediate page number links to be shown; Defaults to 7
     #
     
     def to_html options = {}
+      size = options.delete(:size) || 7
       return if total_pages <= 0
-      # offset = active < size ? 0 : 
-      #     array.length - active < size ?
-      #       array.length - size : 
-      #         active - size / 2 - 1
-      # array[offset, size]
-      previous_link + '<ul class="pager">' + intermediate_links(options.delete(:size)) + '</ul>' + next_link
+
+      previous_link + '<ul class="pager">' + intermediate_links(size) + '</ul>' + next_link
     end
     
     def link_to uri, contents = nil
       %(<a href="#{uri}">#{contents || uri}</a>)
     end
     
-    def intermediate_links size = 6
+    def intermediate_links size
       raise ArgumentError, 'invalid :size; must be an odd number' if size && size % 2 == 0
       (1..size || total_pages).map { |n|
         (n == current_page ? 
