@@ -17,3 +17,9 @@ def mock_items
     instance_variable_set :"@item_#{n}", Item.create
   end
 end
+
+def items from, to
+  (from..to).map do |n|
+    instance_variable_get :"@item_#{n}"
+  end
+end

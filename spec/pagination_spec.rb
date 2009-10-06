@@ -4,12 +4,6 @@ require File.dirname(__FILE__) + '/spec_helper'
 describe DataMapper::Pagination do
   before(:each) { mock_items }
   
-  def items from, to
-    (from..to).map do |n|
-      instance_variable_get :"@item_#{n}"
-    end
-  end
-  
   describe "#page" do
     it "should default page to 1, :per_page to 6, and :order to :id.desc" do
       Item.page.should == items(15, 20).reverse
