@@ -49,7 +49,6 @@ describe DataMapper::Pager do
         markup.should include('>2<')
         markup.should include('>3<')
         markup.should_not include('>4<')
-        puts markup
       end
     end
     
