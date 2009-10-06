@@ -54,5 +54,13 @@ describe DataMapper::Pagination do
         Item.all.page(3).pager.current_page.should == 3
       end
     end
+    
+    describe "#total_pages" do
+      it "should be assigned when paging" do
+        Item.all.page.pager.total_pages.should == 4
+        Item.all.page(:per_page => 3).pager.total_pages.should == 7
+        Item.all.page(:per_page => 2).pager.total_pages.should == 10
+      end
+    end
   end
 end

@@ -15,15 +15,21 @@ module DataMapper
     ##
     # Current page number.
     
-    attr_reader :current_page 
+    attr_reader :current_page
+    
+    ##
+    # Total number of pages.
+    
+    attr_reader :total_pages
     
     ##
     # Initialize with _options_.
     
     def initialize options = {}
-      @total = options.delete :total
+      @total = options.delete(:total) || 0
       @per_page = options.delete :limit
       @current_page = options.delete :current_page
+      @total_pages = (total.to_f / per_page.to_f).ceil
     end
     
     ##
@@ -55,6 +61,10 @@ module DataMapper
       
       def initialize pager, options = {}
         @pager = pager
+      end
+      
+      def to_html
+        ''
       end
     end
     
