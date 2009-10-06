@@ -2,7 +2,7 @@
 $:.unshift 'lib'
 require 'rubygems'
 require 'dm-core'
-require 'dm-is-paginated'
+require 'dm-pagination'
 
 DataMapper.setup :default, 'sqlite3::memory:'
 
