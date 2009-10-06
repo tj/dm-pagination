@@ -36,6 +36,16 @@ describe DataMapper::Pager do
         markup.should include('>3<')
         markup.should include('class="more">...</li></ul>')
       end
+      
+      it "should not render the 'First' page link" do
+        markup = Item.page.pager.to_html
+        markup.should_not include('First')
+      end
+      
+      it "should render the 'Last' page link" do
+        markup = Item.page.pager.to_html
+        markup.should include('Last')
+      end
     end
     
     describe "with the :size option set" do
@@ -56,6 +66,16 @@ describe DataMapper::Pager do
       it "should not render the 'Next' page link" do
         markup = Item.page(4).pager.to_html
         markup.should_not include('Next')
+      end
+      
+      it "should not render the 'Last' page link" do
+        markup = Item.page(4).pager.to_html
+        markup.should_not include('Last')
+      end
+      
+      it "should render the 'First' page link" do
+        markup = Item.page(4).pager.to_html
+        markup.should include('First')
       end
       
       it "should render some intermediate page links with ..." do
@@ -85,6 +105,16 @@ describe DataMapper::Pager do
         markup.should include('>5<')
         markup.should include('>6<')
         markup.should include('<li class=\"more\">...</li></ul>')
+      end
+      
+      it "should render the 'Last' page link" do
+        markup = Item.page(2).pager.to_html
+        markup.should include('Last')
+      end
+      
+      it "should render the 'First' page link" do
+        markup = Item.page(2).pager.to_html
+        markup.should include('First')
       end
     end
     
