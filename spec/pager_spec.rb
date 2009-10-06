@@ -5,6 +5,12 @@ describe DataMapper::Pager do
   before(:each) { mock_items }
   
   describe "#to_html" do
+    describe "when pages are available" do
+      it "should render a ul.pager list" do
+        Item.page.pager.to_html.should include('<ul class="pager">')
+      end
+    end
+    
     describe "when on the first page" do
       it "should not render the 'Previous' page link" do
         markup = Item.page.pager.to_html
