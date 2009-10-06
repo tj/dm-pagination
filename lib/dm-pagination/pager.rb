@@ -46,10 +46,15 @@ module DataMapper
     
     ##
     # Render the pager with the given _options_.
+    #
+    # === Options
+    #
+    #   :size   Number of intermediate page number links to be shown
+    #
     
     def to_html options = {}
       return if total_pages <= 0
-      previous_link + '<ul class="pager">' + (1..total_pages).map { |n|
+      previous_link + '<ul class="pager">' + (1..options[:size] || total_pages).map { |n|
         '<li>%s</li>' % link_to(n)
       }.join("\n") + '</ul>' + next_link
     end

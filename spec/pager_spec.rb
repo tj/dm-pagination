@@ -28,6 +28,17 @@ describe DataMapper::Pager do
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
+        markup.should include('>4<')
+      end
+    end
+    
+    describe "with the :size option set to 3" do
+      it "should render only 3 intermediate page links" do
+        markup = Item.page.pager.to_html :size => 3
+        markup.should include('>1<')
+        markup.should include('>2<')
+        markup.should include('>3<')
+        markup.should_not include('>4<')
       end
     end
     
