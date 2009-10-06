@@ -1,15 +1,8 @@
 
-# User.all.page(5, :per_page => 2)
-
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe DataMapper::Pagination do
-  before :each do
-    DataMapper.auto_migrate!
-    1.upto 20 do |n|
-      instance_variable_set :"@item_#{n}", Item.create
-    end 
-  end
+  before(:each) { mock_items }
   
   def items from, to
     (from..to).map do |n|
