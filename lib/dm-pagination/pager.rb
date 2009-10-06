@@ -94,11 +94,11 @@ module DataMapper
       next_page ? link_to(next_page, 'Next') : ''
     end
     
-    def first_link
+    def last_link
       next_page ? link_to(total, 'Last') : ''
     end
     
-    def last_link
+    def first_link
       previous_page ? link_to(1, 'First') : ''
     end
     
