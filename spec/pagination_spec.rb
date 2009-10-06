@@ -34,10 +34,25 @@ describe DataMapper::Pagination do
     end
   end
   
-  describe "#total" do
-    it "should be assigned when paging" do
-      Item.all.page.length.should == 6
-      Item.all.page.total.should == 20
+  describe "#pager" do
+    describe "#total" do
+      it "should be assigned when paging" do
+        Item.all.page.length.should == 6
+        Item.all.page.pager.total.should == 20
+      end
+    end
+    
+    describe "#per_page" do
+      it "should be assigned when paging" do
+        Item.all.page.pager.per_page.should == 6
+      end
+    end
+    
+    describe "#current_page" do
+      it "should be assigned when paging" do
+        Item.all.page.pager.current_page.should == 1
+        Item.all.page(3).pager.current_page.should == 3
+      end
     end
   end
 end

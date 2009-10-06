@@ -3,13 +3,12 @@ module DataMapper
   module Pagination
     
     ##
-    # Number of unlimited results which is derived
-    # from the #page query without :limit and :offset.
+    # DataMapper::Pager instance.
     
-    attr_accessor :total
+    attr_accessor :pager
     
     ##
-    # Page collection by the _current_ page number and _options_ provided.
+    # Page collection by the _current_page_ number and _options_ provided.
     #
     # === Options
     #
@@ -21,14 +20,15 @@ module DataMapper
     #   User.all.
     #
     
-    def page current = 1, options = {}
-      options, current = current, 1 if current.is_a? Hash
-      collection = new_collection scoped_query({
+    def page current_page = 1, options = {}
+      options, current_page = current_page, 1 if current_page.is_a? Hash
+      collection = new_collection scoped_query(options = {
         :limit => per_page = (options.delete(:per_page) || 6),
-        :offset => (current - 1) * per_page,
+        :offset => (current_page - 1) * per_page,
         :order => [:id.desc]
       }.merge(options))
-      collection.total = count options
+      options.merge! :total => count(options), :current_page => current_page
+      collection.pager = DataMapper::Pager.new options
       collection
     end
   end
