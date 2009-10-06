@@ -6,8 +6,12 @@ describe DataMapper::Pager do
   
   describe "#to_html" do
     describe "when pages are available" do
-      it "should render a ul.pager list" do
-        Item.page.pager.to_html.should include('<ul class="pager">')
+      it "should render a div.pager wrapper" do
+        Item.page.pager.to_html.should include('<div class="pager">')
+      end
+      
+      it "should render a ul containing intermediate items" do
+        Item.page.pager.to_html.should include('<ul><li')
       end
       
       it "should add the 'active' class to the current page link <li>" do
