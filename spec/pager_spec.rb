@@ -10,6 +10,13 @@ describe DataMapper::Pager do
         markup = Item.page.pager.to_html
         markup.should_not include('Previous')
       end
+      
+      it "should render some intermediate page links" do
+        markup = Item.page.pager.to_html
+        markup.should include('>1<')
+        markup.should include('>2<')
+        markup.should include('>3<')
+      end
     end
     
     describe "when on the last page" do

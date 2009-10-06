@@ -48,7 +48,9 @@ module DataMapper
     # Render the pager with the given _options_.
     
     def to_html options = {}
-      previous_link + next_link
+      previous_link + (1..@total_pages).map { |n|
+        '<li>%s</li>' % link_to(n)
+      }.join("\n") + next_link
     end
     
     def link_to uri, contents = nil
