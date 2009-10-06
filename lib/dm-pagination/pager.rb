@@ -59,7 +59,9 @@ module DataMapper
           total - current_page < size ?
             total - size : 
               current_page - size / 2 - 1
-      previous_link + '<ul class="pager">' + intermediate_links(size)[offset, size].join("\n") + '</ul>' + next_link
+      previous_link + '<ul class="pager">' + 
+      intermediate_links(size)[offset, size].join("\n") + 
+      '</ul>' + next_link
     end
     
     def link_to uri, contents = nil
