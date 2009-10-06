@@ -32,8 +32,8 @@ describe DataMapper::Pager do
       end
     end
     
-    describe "with the :size option set to 3" do
-      it "should render only 3 intermediate page links" do
+    describe "with the :size option set" do
+      it "should render only the specified number of intermediate page links" do
         markup = Item.page.pager.to_html :size => 3
         markup.should include('>1<')
         markup.should include('>2<')
