@@ -5,13 +5,39 @@
   
 # Examples
 
-  * Coming soon
-  
-# Styling
+Page 1 for all items, defaulting to 6 per page:
+    Item.page
+    
+Page 2 for all items, 6 per page:
+    Item.page 2
+    
+Page 5, 2 per page:
+    Item.page 5, :per_page => 2
+    
+Accessing the pager instance:
+    Item.page(2).pager
+    
+Converting to HTML:
+    Item.page(2).pager.to_html
+    
+Alter the number of intermediate numbered links displayed, defaults to 7
+    Item.page(2).pager.to_html(:size => 3)
+    
+# Output
 
-With CSS you may hide anything you wish to remove. There is
+Output is displayed in a format similar to below, although 
+with CSS you may hide anything you wish to remove. There is
 no need to provide an API for this.
 
+    Item.page(2).pager.to_html(:size => 3)
+    // => First Previous 1 [2] 3 ... Next Last
+    
+    Item.page.pager.to_html
+    // => [1] 2 3 4 5 6 7 ... Next Last
+
+    Item.page(5).pager.to_html(:size => 5)
+    // => First Previous ... 3 4 [5] 6 7 ... Next Last
+    
 ## License
 
 (The MIT License)
