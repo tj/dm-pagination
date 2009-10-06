@@ -3,7 +3,7 @@
 
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe DataMapper::Model do
+describe DataMapper::Pagination do
   before :each do
     DataMapper.auto_migrate!
     1.upto 20 do |n|
@@ -48,7 +48,7 @@ describe DataMapper::Model do
   end
   
   describe "#total" do
-    it "should be set when paging" do
+    it "should be assigned when paging" do
       Item.all.page.length.should == 6
       Item.all.page.total.should == 20
     end
