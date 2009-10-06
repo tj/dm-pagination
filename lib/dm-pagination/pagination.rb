@@ -3,7 +3,8 @@ module DataMapper
   module Pagination
     
     ##
-    # Un-paged total.
+    # Number of unlimited results which is derived
+    # from the #page query without :limit and :offset.
     
     attr_accessor :total
     
