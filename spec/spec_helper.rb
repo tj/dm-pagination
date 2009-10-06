@@ -8,7 +8,6 @@ DataMapper.setup :default, 'sqlite3::memory:'
 
 class Item
   include DataMapper::Resource
-  is :paginated
   property :id,   Serial
 end
 

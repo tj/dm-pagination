@@ -21,49 +21,48 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
+require 'dm-aggregates'
+
 module DataMapper
-  module Is
-    module Paginated
-      
-      #--
-      # Constants
-      #++
-      
-      VERSION = '0.10.1'
-      
-      ##
-      # Plugin API.
-      
-      def is_paginated options = {}
-        extend ClassMethods
-      end
-      
-      module ClassMethods
-        
-        ##
-        # Page collection by the _current_ page number and _options_ provided.
-        #
-        # === Options
-        #
-        #   :per_page   Results per page; defaults to 6
-        #   :order      Defaults to [:id.desc]
-        #
-        # === Examples
-        #    
-        #   User.all.
-        #
-        
-        def page current = 1, options = {}
-          options, current = current, 1 if current.is_a? Hash
-          new_collection scoped_query({
-            :limit => per_page = (options.delete(:per_page) || 6),
-            :offset => (current - 1) * per_page,
-            :order => [:id.desc]
-          }.merge(options))
-        end
-      end
+  module Pagination
+    
+    #--
+    # Constants
+    #++
+    
+    VERSION = '0.0.1'
+    
+    ##
+    # Un-paged total.
+    
+    attr_accessor :total
+    
+    ##
+    # Page collection by the _current_ page number and _options_ provided.
+    #
+    # === Options
+    #
+    #   :per_page   Results per page; defaults to 6
+    #   :order      Defaults to [:id.desc]
+    #
+    # === Examples
+    #    
+    #   User.all.
+    #
+    
+    def page current = 1, options = {}
+      options, current = current, 1 if current.is_a? Hash
+      collection = new_collection scoped_query({
+        :limit => per_page = (options.delete(:per_page) || 6),
+        :offset => (current - 1) * per_page,
+        :order => [:id.desc]
+      }.merge(options))
+      collection.total = count options
+      collection
     end
   end
 end
 
-DataMapper::Model.append_extensions DataMapper::Is::Paginated
+DataMapper::Model.send :include, DataMapper::Pagination
+DataMapper::Collection.send :include, DataMapper::Pagination
+DataMapper::Query.send :include, DataMapper::Pagination
