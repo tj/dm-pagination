@@ -36,8 +36,26 @@ describe DataMapper::Is::Paginated do
       Item.page(3, :order => [:id.asc]).should == items(14, 20)
     end
     
+    it "should allow :per_page to be overriden" do
+      Item.page(1, :per_page => 3, :order => [:id.asc]).should == items(1, 3)
+      Item.page(2, :per_page => 3, :order => [:id.asc]).should == items(4, 7)
+      Item.page(3, :per_page => 3, :order => [:id.asc]).should == items(8, 12)
+    end
+    
     it "should allow chaining of queries" do
       Item.all(:id.lt => 4).page.should be_a(DataMapper::Collection)
     end
   end
 end
+
+# TODO: dm-aggregates for #count
+# TODO:   count needs the same query
+# TODO:   store pagination info / query in the paginated Collection
+# TODO:   @items.pager
+=begin
+  def order_by params
+    (params[:order] || []).map do |key, val|
+      DataMapper::Query::Operator.new self, key.to_sym
+    end
+  end
+=end
