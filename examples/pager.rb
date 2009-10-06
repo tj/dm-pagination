@@ -1,0 +1,34 @@
+
+$:.unshift File.dirname(__FILE__) + '/../lib'
+
+require 'rubygems'
+require 'dm-core'
+require 'dm-pagination'
+
+class Item
+  include DataMapper::Resource
+  property :id,   Serial
+end
+
+DataMapper.setup :default, 'sqlite3::memory:'
+DataMapper.auto_migrate!
+(1..10).each { |n| Item.create }
+
+def show example
+  puts example
+  expr = eval example
+  if String === expr
+    puts expr + "\n\n"
+  else
+    puts "# => #{eval(example).inspect}\n\n"
+  end
+end
+
+show 'Item.page'
+show 'Item.page(2)'
+show 'Item.page(1, :per_page => 4)'
+show 'Item.page(1, :per_page => 4).pager'
+show 'Item.page(1, :per_page => 4).pager.to_html'
+show 'Item.page(1, :per_page => 4).pager.to_html(:size => 3)'
+show 'Item.page(2, :per_page => 4).pager.to_html(:size => 3)'
+show 'Item.page(3, :per_page => 4).pager.to_html(:size => 3)'

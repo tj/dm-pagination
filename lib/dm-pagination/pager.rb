@@ -71,10 +71,8 @@ module DataMapper
     end
     
     def more position
-      '<li class="more">...</li>' if begin
-          # TODO: finish
-          true
-        end || ''
+      # TODO: finish
+      %(<li class="more">...</li>\n)
     end
     
     def intermediate_links
