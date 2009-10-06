@@ -110,11 +110,11 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ... before and after" do
         markup = Item.page(5, :per_page => 2).pager.to_html :size => 3
-        markup.should include('<ul class=\"pager\"><li class="more">...<')
+        markup.should include('<ul class="pager"><li class="more">...<')
         markup.should include('>4<')
         markup.should include('>5<')
         markup.should include('>6<')
-        markup.should include('<li class=\"more\">...</li></ul>')
+        markup.should include('<li class="more">...</li></ul>')
       end
       
       it "should render the 'Last' page link" do
