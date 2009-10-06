@@ -44,6 +44,24 @@ no need to provide an API for this.
     Item.page(5).pager.to_html(:size => 5)
     // => First Previous ... 3 4 [5] 6 7 ... Next Last
     
+# Markup
+
+Below is sample markup produced:
+
+    <div class="pager">
+      <a href="1" class="link-first">First</a>
+      <a href="3" class="link-previous">Previous</a>
+      <ul>
+        <li class="more">...</li>
+        <li><a href="3" class="link-3">3</a></li>
+        <li class="active"><a href="4" class="link-4">4</a></li>
+        <li><a href="5" class="link-5">5</a></li>
+        <li class="more">...</li>
+      </ul>
+      <a href="5" class="link-next">Next</a>
+      <a href="10" class="link-last">Last</a>
+    </div>
+    
 ## License
 
 (The MIT License)
