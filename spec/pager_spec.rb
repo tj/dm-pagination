@@ -37,6 +37,11 @@ describe DataMapper::Pager do
         markup.should include(%(class="more">...</li>\n</ul>))
       end
       
+      it "should not render ... before" do
+        markup = Item.page.pager.to_html :size => 3
+        markup.should_not include('class="pager">...<')
+      end
+      
       it "should not render the 'First' page link" do
         markup = Item.page.pager.to_html
         markup.should_not include('First')
@@ -80,10 +85,15 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ... before" do
         markup = Item.page(4).pager.to_html :size => 3
-        markup.should include('class=\"pager\"><li class="more">...<')
+        markup.should include('class="pager"><li class="more">...<')
         markup.should include('>2<')
         markup.should include('>3<')
         markup.should include('>4<')
+      end
+      
+      it "should not render ... after" do
+        markup = Item.page(4).pager.to_html :size => 3
+        markup.should_not include('<li class="more">...</li></ul>')
       end
     end
     
