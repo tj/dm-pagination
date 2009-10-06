@@ -18,5 +18,18 @@ describe DataMapper::Pager do
         markup.should_not include('Next')
       end
     end
+    
+    describe "when on an intermediate page" do
+      it "should render the 'Previous' page link" do
+        markup = Item.page(2).pager.to_html
+        markup.should include('Previous')
+      end
+      
+      it "should render the 'Next' page link" do
+        markup = Item.page(2).pager.to_html 
+        markup.should include('Next')
+      end
+    end
+    
   end
 end

@@ -36,7 +36,7 @@ module DataMapper
     # Initialize with _options_.
     
     def initialize options = {}
-      @total = options.delete(:total) || 0
+      @total = options.delete :total
       @per_page = options.delete :limit
       @current_page = options.delete :current_page
       @total_pages = (total.to_f / per_page.to_f).ceil
