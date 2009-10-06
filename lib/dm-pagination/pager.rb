@@ -27,11 +27,16 @@ module DataMapper
     end
     
     ##
-    # Render the pager with the given _formatter_
-    # which defaults to DataMapper::Pager::Formatter
+    # Render the pager with the given _options_.
+    # Additional options are passed to the formatter.
+    # 
+    # === Options
+    #
+    #   :formatter   Defaults to DataMapper::Pager::Formatter
+    #
     
-    def to_html
-      Formatter.new(self).to_html
+    def to_html options = {}
+      (options.delete(:formatter) || Formatter).new(self, options).to_html
     end
     
     #--
@@ -46,9 +51,9 @@ module DataMapper
       attr_reader :pager
       
       ##
-      # Initialize with _pager_.
+      # Initialize with _pager_ and _options_.
       
-      def initialize pager
+      def initialize pager, options = {}
         @pager = pager
       end
     end
