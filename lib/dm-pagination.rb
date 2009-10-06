@@ -25,6 +25,7 @@ require 'dm-core'
 require 'dm-aggregates'
 require 'dm-pagination/version'
 require 'dm-pagination/pagination'
+require 'dm-pagination/pager'
 
 DataMapper::Model.send :include, DataMapper::Pagination
 DataMapper::Collection.send :include, DataMapper::Pagination
