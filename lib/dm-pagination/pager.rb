@@ -54,6 +54,7 @@ module DataMapper
     
     def to_html options = {}
       return if total_pages <= 0
+      raise ArgumentError, 'invalid :size; must be an odd number' if options[:size] && (options[:size] % 2) == 0
       previous_link + '<ul class="pager">' + (1..options[:size] || total_pages).map { |n|
         '<li>%s</li>' % link_to(n)
       }.join("\n") + '</ul>' + next_link

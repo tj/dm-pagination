@@ -40,6 +40,10 @@ describe DataMapper::Pager do
         markup.should_not include('>3<')
         markup.should_not include('>4<')
       end
+      
+      it "should raise an error when given an even number" do
+        lambda { Item.page.pager.to_html :size => 2 }.should raise_error(ArgumentError, /must be an odd number/)
+      end
     end
     
     describe "when on the last page" do
