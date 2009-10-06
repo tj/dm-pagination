@@ -34,7 +34,7 @@ describe DataMapper::Pager do
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
-        markup.should include('class="more">...</li></ul>')
+        markup.should include(%(class="more">...</li>\n</ul>))
       end
       
       it "should not render the 'First' page link" do
