@@ -1,0 +1,11 @@
+History.md
+Rakefile
+Readme.md
+lib/dm-pagination.rb
+spec/pagination_model_spec.rb
+spec/spec.opts
+spec/spec_helper.rb
+tasks/docs.rake
+tasks/gemspec.rake
+tasks/spec.rake
+Manifest
