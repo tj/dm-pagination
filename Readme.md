@@ -62,6 +62,16 @@ Below is sample markup produced:
       <a href="10" class="link-last">Last</a>
     </div>
     
+## Running Specs
+
+Autospec:
+    $ autospec
+  
+RSpec:
+    $ rake spec
+    $ rake spec:verbose
+    $ rake spec:select SPEC=spec/pager_spec.rb
+    
 ## License
 
 (The MIT License)
