@@ -59,6 +59,8 @@ module DataMapper
     def to_html base_path, options = {}
       @base_path = base_path
       @size = options.delete(:size) || Pagination.defaults[:page_window]
+      raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
+      @size /= 2
       return if total_pages <= 0
       "<div class=\"#{Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
       more(:before) +
@@ -73,16 +75,13 @@ module DataMapper
     end
     
     def more position
-      return '' if position == :before && current_page == 1
-      return '' if position == :after && current_page == total_pages
+      return '' if position == :before && (current_page <= 1 || first_page_link <= 1)
+      return '' if position == :after && (current_page >= total_pages || last_page_link >= total_pages)
       %(<li class="more">...</li>\n)
     end
     
     def intermediate_links
-      raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
-      first_page = [current_page - (@size / 2), 1].max
-      last_page  = [current_page + (@size / 2), total_pages].min
-      (first_page..last_page).map { |n|
+      (first_page_link..last_page_link).map { |n|
         (n == current_page ? 
           '<li class="active">%s</li>' : 
             '<li>%s</li>') % link_to(n, Pagination.defaults[:page_link_class] ? "#{Pagination.defaults[:page_link_class]}#{n}" : nil)
@@ -104,7 +103,23 @@ module DataMapper
     def first_link
       previous_page ? link_to(1, Pagination.defaults[:first_link_class], Pagination.defaults[:first_text]) : ''
     end
-    
+
+    def first_page_link
+      first = [current_page - @size, 1].max
+      if (current_page - total_pages).abs < @size
+        first = [first - (@size - (current_page - total_pages).abs), 1].max
+      end
+      first
+    end
+
+    def last_page_link
+      last = [current_page + @size, total_pages].min
+      if @size >= current_page
+        last = [last + (@size - current_page) + 1, total_pages].min
+      end
+      last
+    end
+
     def build_uri(page)
       if @base_path =~ /page=\d+/
         @base_path.gsub(/page=\d+/, "page=#{page}")
