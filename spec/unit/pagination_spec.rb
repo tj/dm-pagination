@@ -18,6 +18,11 @@ describe DataMapper::Pagination do
       Item.page(nil).pager.current_page.should == 1
     end
     
+    it "should coerce strings to ints" do
+      Item.page('5').pager.current_page.should == 5
+      Item.page('5.0').pager.current_page.should == 5
+    end
+    
     it "should default :per_page to 6" do
       Item.page.length.should == 6
     end
