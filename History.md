@@ -1,4 +1,10 @@
 
+=== 0.0.4 / 2009-10-07
+
+  * Added DataMapper::Pagination#pager_option 
+  * Fixed :per_page; now may be 'per_page' as well
+  * Fixed :per_page; now allows for numeric strings
+
 === 0.0.3 / 2009-10-07
 
   * Fixed issue caused by indifferent params hash having both :page and 'page' keys
