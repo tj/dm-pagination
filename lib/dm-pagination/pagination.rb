@@ -24,7 +24,7 @@ module DataMapper
       options, current_page = current_page, 1 if current_page.is_a? Hash
       query = options.dup
       collection = new_collection scoped_query(options = {
-        :limit => per_page = (query.delete(:per_page) || 6),
+        :limit => per_page = (query.delete(:per_page) || DataMapper::Pagination.defaults[:records_per_page]),
         :offset => (current_page - 1) * per_page,
         :order => [:id.desc]
       }.merge(query))

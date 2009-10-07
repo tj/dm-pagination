@@ -58,13 +58,13 @@ module DataMapper
     
     def to_html base_path, options = {}
       @base_path = base_path
-      @size = options.delete(:size) || 7
+      @size = options.delete(:size) || DataMapper::Pagination.defaults[:page_window]
       return if total_pages <= 0
       @offset = current_page < @size ? 0 : 
           total - current_page < @size ?
             total - @size : 
               current_page - @size / 2 - 1
-      '<div class="pager">' + first_link + previous_link + '<ul>' + 
+      "<div class=\"#{DataMapper::Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
       more(:before) +
       intermediate_links[@offset, @size].join("\n") + 
       more(:after) +
@@ -91,19 +91,19 @@ module DataMapper
     end
     
     def previous_link
-      previous_page ? link_to(previous_page, 'Previous') : ''
+      previous_page ? link_to(previous_page, DataMapper::Pagination.defaults[:previous_text]) : ''
     end
     
     def next_link
-      next_page ? link_to(next_page, 'Next') : ''
+      next_page ? link_to(next_page, DataMapper::Pagination.defaults[:next_text]) : ''
     end
     
     def last_link
-      next_page ? link_to(total, 'Last') : ''
+      next_page ? link_to(total, DataMapper::Pagination.defaults[:last_text]) : ''
     end
     
     def first_link
-      previous_page ? link_to(1, 'First') : ''
+      previous_page ? link_to(1, DataMapper::Pagination.defaults[:first_text]) : ''
     end
     
     def build_uri(page)

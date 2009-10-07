@@ -22,6 +22,42 @@
 #++
 
 require 'dm-core'
+
+module DataMapper
+
+  module Pagination
+
+    @@defaults = {
+      :records_per_page => 6,
+      :page_window      => 7,
+      :pager_class      => 'pager',
+      :previous_text    => 'Previous',
+      :next_text        => 'Next',
+      :first_text       => 'First',
+      :last_text        => 'Last',
+    }
+
+    ##
+    # Default values used by the paginator
+    #
+    # === Options
+    #
+    #   :records_per_page   Records per page; defaults to 6
+    #   :page_window        Number of intermediate page number links to be shown; Defaults to 7
+    #   :pager_class        Class for the div that contains the pagination links, defaults to 'pager'
+    #   :previous_text      Text for the 'previous' link, defaults to 'Previous'
+    #   :next_text          Text for the 'next' link, defaults to 'Next'
+    #   :first_text         Text for the 'first' link, defaults to 'First'
+    #   :last_text          Text for the 'last' link, defaults to 'Last'
+    #
+    def self.defaults
+      @@defaults
+    end
+
+  end
+
+end
+
 require 'dm-aggregates'
 require 'dm-pagination/version'
 require 'dm-pagination/pagination'
