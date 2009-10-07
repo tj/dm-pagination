@@ -58,7 +58,7 @@ module DataMapper
     #
     
     def to_html uri, options = {}
-      return if total_pages <= 0
+      return unless total_pages > 1
       @uri = uri
       @size = options.fetch :size, Pagination.defaults[:size]
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0

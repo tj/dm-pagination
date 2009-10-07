@@ -37,6 +37,12 @@ describe DataMapper::Pager do
       end
     end
     
+    describe "when one page is available" do
+      it "should render nothing" do
+        Item.all(:id.lt => 2).page.pager.to_html('/').should be_nil
+      end
+    end
+    
     describe "when no pages are available" do
       it "should render nothing" do
         Item.all(:id.lt => 1).page.pager.to_html('/').should be_nil
