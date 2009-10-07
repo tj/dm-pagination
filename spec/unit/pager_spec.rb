@@ -15,25 +15,25 @@ describe DataMapper::Pager do
       end
       
       it "should add the 'active' class to the current page link <li>" do
-        Item.page.pager.to_html('/').should include('li class="first active page-1"><a href="/?page=1"')
+        Item.page.pager.to_html('/').should include('li class="active page-1 first"><a href="/?page=1"')
         Item.page(2).pager.to_html('/').should include('li class="active page-2"><a href="/?page=2"')
         Item.page(3).pager.to_html('/').should include('li class="active page-3"><a href="/?page=3"')
       end
       
-      it "should add .page-last" do
-        Item.page.pager.to_html('/').should include('class="page-last">Last')
+      it "should add a.last" do
+        Item.page.pager.to_html('/').should include('class="last">Last')
       end
       
-      it "should add .page-first" do
-        Item.page(2).pager.to_html('/').should include('class="page-first">First')
+      it "should add a.first" do
+        Item.page(2).pager.to_html('/').should include('class="first">First')
       end
       
-      it "should add .page-next" do
-        Item.page.pager.to_html('/').should include('class="page-next">Next')
+      it "should add a.next" do
+        Item.page.pager.to_html('/').should include('class="next">Next')
       end
       
-      it "should add .page-previous" do
-        Item.page(2).pager.to_html('/').should include('class="page-previous">Previous')
+      it "should add a.previous" do
+        Item.page(2).pager.to_html('/').should include('class="previous">Previous')
       end
     end
     

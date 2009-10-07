@@ -69,7 +69,7 @@ module DataMapper
     end
     
     def link_to page, contents = nil
-      %(<a href="#{uri_for(page)}">#{contents || page}</a>)
+      %(<a href="#{uri_for(page)}" class="#{contents.to_s.downcase.tr(' ', '-')}">#{contents || page}</a>)
     end
     
     def more position
@@ -80,9 +80,11 @@ module DataMapper
     
     def intermediate_links
       (first..last).map do |page|
-        (page == current_page ? 
-          '<li class="active">%s</li>' : 
-            '<li>%s</li>') % link_to(page)
+        classes = current_page == page ? ['active'] : []
+        classes << "page-#{page}"
+        classes << 'first' if first == page
+        classes << 'last' if last == page
+        '<li class="%s">%s</li>' % [classes.join(' '), link_to(page)]
       end
     end
     
