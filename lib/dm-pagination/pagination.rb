@@ -8,7 +8,7 @@ module DataMapper
     attr_accessor :pager
     
     ##
-    # Page collection by the _current_page_ number and _options_ provided.
+    # Page collection by the _page_ number and _options_ provided.
     #
     # === Options
     #
@@ -23,17 +23,17 @@ module DataMapper
     #   User.all.page(:page => 2, :per_page => 5)
     #
     
-    def page current_page = 1, options = {}
-      options, current_page = current_page, nil if current_page.is_a? Hash
-      current_page ||= options.delete :page
-      current_page = 1 unless (current_page = current_page.to_i) && current_page > 1
+    def page page = 1, options = {}
+      options, page = page, nil if page.is_a? Hash
+      page ||= options.delete :page
+      page = 1 unless (page = page.to_i) && page > 1
       query = options.dup
       collection = new_collection scoped_query(options = {
         :limit => per_page = (query.delete(:per_page) || Pagination.defaults[:per_page]),
-        :offset => (current_page - 1) * per_page,
+        :offset => (page - 1) * per_page,
         :order => [:id.desc]
       }.merge(query))
-      options.merge! :total => count(query), :current_page => current_page
+      options.merge! :total => count(query), :page => page
       collection.pager = DataMapper::Pager.new options
       collection
     end
