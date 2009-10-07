@@ -60,13 +60,9 @@ module DataMapper
       @base_path = base_path
       @size = options.delete(:size) || Pagination.defaults[:page_window]
       return if total_pages <= 0
-      @offset = current_page < @size ? 0 : 
-          total - current_page < @size ?
-            total - @size : 
-              current_page - @size / 2 - 1
       "<div class=\"#{Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
       more(:before) +
-      intermediate_links[@offset, @size].join("\n") + 
+      intermediate_links.join("\n") + 
       more(:after) +
       '</ul>' + next_link + last_link + '</div>'
     end
@@ -77,13 +73,16 @@ module DataMapper
     end
     
     def more position
-      return '' if position == :before && @offset == 0
-      %(<li#{Pagination.defaults[:more_class] ? " class=\"#{Pagination.defaults[:more_class]}\"" : ''}>...</li>\n)
+      return '' if position == :before && current_page == 1
+      return '' if position == :after && current_page == total_pages
+      %(<li class="more">...</li>\n)
     end
     
     def intermediate_links
-      raise ArgumentError, 'invalid :size; must be an odd number' if @size && @size % 2 == 0
-      (1..@size || total_pages).map { |n|
+      raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
+      first_page = [current_page - (@size / 2), 1].max
+      last_page  = [current_page + (@size / 2), total_pages].min
+      (first_page..last_page).map { |n|
         (n == current_page ? 
           '<li class="active">%s</li>' : 
             '<li>%s</li>') % link_to(n, Pagination.defaults[:page_link_class] ? "#{Pagination.defaults[:page_link_class]}#{n}" : nil)
@@ -99,7 +98,7 @@ module DataMapper
     end
     
     def last_link
-      next_page ? link_to(total, Pagination.defaults[:last_link_class], Pagination.defaults[:last_text]) : ''
+      next_page ? link_to(total_pages, Pagination.defaults[:last_link_class], Pagination.defaults[:last_text]) : ''
     end
     
     def first_link
