@@ -38,6 +38,10 @@ describe DataMapper::Pagination do
     it "should allow :page as a hash param" do
       Item.page(:page => 2, :order => [:id.asc]).should == items(7, 12)
     end
+    
+    it "should both keys from indifferent hashes when using :page" do
+      Item.page(:page => 2, 'page' => 2, :order => [:id.asc]).should == items(7, 12)
+    end
 
     it "should allow a hash of options as the first parameter" do
       Item.page(:order => [:id.asc]).should == items(1, 6)

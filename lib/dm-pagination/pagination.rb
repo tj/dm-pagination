@@ -12,6 +12,7 @@ module DataMapper
     #
     # === Options
     #
+    #   :page       Current page number
     #   :per_page   Results per page; defaults to 6
     #   :order      Defaults to [:id.desc]
     #
@@ -25,7 +26,7 @@ module DataMapper
     
     def page page = 1, options = {}
       options, page = page, nil if page.is_a? Hash
-      page ||= options.delete :page
+      page ||= options.delete(:page); options.delete('page')
       page = 1 unless (page = page.to_i) && page > 1
       query = options.dup
       collection = new_collection scoped_query(options = {
