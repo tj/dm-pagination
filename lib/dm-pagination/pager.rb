@@ -58,11 +58,11 @@ module DataMapper
     #
     
     def to_html base_path, options = {}
+      return if total_pages <= 0
       @base_path = base_path
       @size = options.fetch :size, Pagination.defaults[:size]
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
-      return if total_pages <= 0
       "<div class=\"#{Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
       more(:before) +
       intermediate_links.join("\n") + 
