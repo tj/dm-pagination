@@ -69,10 +69,12 @@ Sample markup:
 Autospec:
     $ autospec
   
-RSpec:
+Rake:
     $ rake spec
     $ rake spec:verbose
-    $ rake spec:select SPEC=spec/pager_spec.rb
+    $ rake spec:select SPEC=spec/unit/pager_spec.rb
+    
+RSpec:
     $ spec --color spec
     
 ## Authors
