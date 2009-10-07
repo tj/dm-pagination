@@ -1,6 +1,6 @@
 
 module DataMapper
   module Pagination
-    VERSION = '0.0.2'
+    VERSION = '0.10.1'
   end
 end
