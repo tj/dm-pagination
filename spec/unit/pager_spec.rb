@@ -158,5 +158,28 @@ describe DataMapper::Pager do
       end
     end
     
+    describe "when passing a uri without a query string" do
+      it "should append a query string to each uri" do
+        markup = Item.page.pager.to_html 'items'
+        markup.should include('items?page=1')
+      end
+    end
+    
+    describe "when passing a uri with a query string" do
+      describe "containing page=N" do
+        it "should alter the page value" do
+          markup = Item.page.pager.to_html 'items?page=2'
+          markup.should include('items?page=1')
+        end
+      end
+      
+      describe "not containing page=N" do
+        it "should append a pair" do
+          markup = Item.page.pager.to_html 'items?foo=bar'
+          markup.should include('items?foo=bar&page=1')
+        end
+      end
+    end
+    
   end
 end
