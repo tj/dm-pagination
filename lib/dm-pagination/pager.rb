@@ -72,7 +72,7 @@ module DataMapper
     
     def link_to page, css_class, contents = nil
       contents ||= page
-      %(<a href="#{build_uri(page)}"#{ " class=\"#{css_class}\"" if css_class}>#{contents}</a>)
+      %(<a href="#{uri_for(page)}"#{ " class=\"#{css_class}\"" if css_class}>#{contents}</a>)
     end
     
     def more position
@@ -121,7 +121,7 @@ module DataMapper
       last
     end
 
-    def build_uri(page)
+    def uri_for page
       if @base_path =~ /page=\d+/
         @base_path.gsub(/page=\d+/, "page=#{page}")
       elsif @base_path =~ /\?/
