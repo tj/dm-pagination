@@ -45,7 +45,7 @@ module DataMapper
     end
     
     ##
-    # Render the pager with the given _base_path_ and _options_.
+    # Render the pager with the given _uri_ and _options_.
     # 
     # === Examples
     #
@@ -57,9 +57,9 @@ module DataMapper
     #   :size   Number of intermediate page number links to be shown; Defaults to 7
     #
     
-    def to_html base_path, options = {}
+    def to_html uri, options = {}
       return if total_pages <= 0
-      @base_path = base_path
+      @uri = uri
       @size = options.fetch :size, Pagination.defaults[:size]
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
@@ -122,11 +122,11 @@ module DataMapper
     end
 
     def uri_for page
-      @base_path['page'] ?
-        @base_path.gsub(/page=\d+/, "page=#{page}") :
-          @base_path['?'] ?
-            @base_path += "&page=#{page}" :
-              @base_path += "?page=#{page}"
+      @uri['page'] ?
+        @uri.gsub(/page=\d+/, "page=#{page}") :
+          @uri['?'] ?
+            @uri += "&page=#{page}" :
+              @uri += "?page=#{page}"
     end
     
   end
