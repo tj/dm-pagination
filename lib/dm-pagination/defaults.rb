@@ -2,8 +2,8 @@ module DataMapper
   module Pagination
 
     @@defaults = {
-      :records_per_page    => 6,
-      :page_window         => 7,
+      :per_page            => 6,
+      :size                => 7,
       :pager_class         => 'pager',
       :previous_text       => 'Previous',
       :next_text           => 'Next',

@@ -50,7 +50,7 @@ module DataMapper
     # === Examples
     #
     #   User.page(2).pager.to_html('/users')
-    #   User.page(2).pager.to_html('/users', :page_window => 3)
+    #   User.page(2).pager.to_html('/users', :size => 3)
     #
     # === Options
     #
@@ -59,7 +59,7 @@ module DataMapper
     
     def to_html base_path, options = {}
       @base_path = base_path
-      @size = options.delete(:size) || Pagination.defaults[:page_window]
+      @size = options.delete(:size) || Pagination.defaults[:size]
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
       return if total_pages <= 0
