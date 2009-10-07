@@ -59,7 +59,7 @@ module DataMapper
     
     def to_html base_path, options = {}
       @base_path = base_path
-      @size = options.delete(:size) || Pagination.defaults[:size]
+      @size = options.fetch :size, Pagination.defaults[:size]
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
       return if total_pages <= 0
