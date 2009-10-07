@@ -1,4 +1,8 @@
 
+=== 0.0.3 / 2009-10-07
+
+  * Fixed issue caused by indifferent params hash having both :page and 'page' keys
+
 0.0.2 / 2009-10-07
 ==================
 
