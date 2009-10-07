@@ -54,6 +54,7 @@ describe DataMapper::Pager do
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
+        markup.should_not include('>4<')
         markup.should include(%(<li class="more">...</li>\n</ul>))
       end
       
@@ -106,9 +107,11 @@ describe DataMapper::Pager do
       it "should render some intermediate page links with ... before" do
         markup = Item.page(4).pager.to_html('/', :size => 3)
         markup.should include('<ul><li class="more">...<')
+        markup.should_not include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
         markup.should include('>4<')
+        markup.should_not include('>5<')
       end
       
       it "should not render ... after" do
@@ -131,9 +134,11 @@ describe DataMapper::Pager do
       it "should render some intermediate page links with ... before and after" do
         markup = Item.page(5, :per_page => 2).pager.to_html('/', :size => 3)
         markup.should include('<ul><li class="more">...<')
+        markup.should_not include('>3<')
         markup.should include('>4<')
         markup.should include('>5<')
         markup.should include('>6<')
+        markup.should_not include('>7<')
         markup.should include(%(<li class="more">...</li>\n</ul>))
       end
       
@@ -155,6 +160,7 @@ describe DataMapper::Pager do
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
+        markup.should_not include('>4<')
         markup.should include(%(<li class="more">...</li>\n</ul>))
       end
     end
@@ -163,9 +169,11 @@ describe DataMapper::Pager do
       it "should render 8 through 10 when :size is 3 with preceding ..." do
         markup = Item.page(9, :per_page => 2).pager.to_html('/', :size => 3)
         markup.should include('<ul><li class="more">...<')
+        markup.should_not include('>7<')
         markup.should include('>8<')
         markup.should include('>9<')
         markup.should include('>10<')
+        markup.should_not include('>11<')
         markup.should_not include(%(<li class="more">...</li>\n</ul>))
       end
     end
