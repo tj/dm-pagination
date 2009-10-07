@@ -35,6 +35,15 @@ describe DataMapper::Pagination do
       Item.page.should == items(15, 20).reverse
     end
     
+    it "should raise an error when page does not respond to #to_i" do
+      lambda { Item.page(true) }.should raise_error
+    end
+    
+    it "should raise an error when :page does not respond to #to_i" do
+      lambda { Item.page(:page => true) }.should raise_error
+      lambda { Item.page('page' => true) }.should raise_error
+    end
+    
     it "should allow :page as a hash param" do
       Item.page(:page => 2, :order => [:id.asc]).should == items(7, 12)
       Item.page(:page => 2, :order => [:id.asc]).pager.current_page.should == 2
@@ -44,7 +53,7 @@ describe DataMapper::Pagination do
       Item.page(:page => '2', 'page' => '2', :order => [:id.asc]).should == items(7, 12)
       Item.page(:page => '2', 'page' => '2', :order => [:id.asc]).pager.current_page.should == 2
     end
-
+    
     it "should allow a hash of options as the first parameter" do
       Item.page(:order => [:id.asc]).should == items(1, 6)
     end

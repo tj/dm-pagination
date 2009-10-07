@@ -24,9 +24,10 @@ module DataMapper
     #   User.all.page(:page => 2, :per_page => 5)
     #
     
-    def page page = 1, options = {}
+    def page page = nil, options = {}
       options, page = page, nil if page.is_a? Hash
-      page ||= options.delete(:page); options.delete('page')
+      page ||= options[:page] || options['page']
+      options.delete(:page); options.delete('page')
       page = 1 unless (page = page.to_i) && page > 1
       query = options.dup
       collection = new_collection scoped_query(options = {
