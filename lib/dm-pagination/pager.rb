@@ -68,6 +68,8 @@ module DataMapper
       '</ul>' + next_link + last_link + '</div>'
     end
     
+    private
+    
     ##
     # Link to _page_ with optional anchor tag _contents_. 
     
