@@ -39,7 +39,7 @@ module DataMapper
       @total = options.delete :total
       @per_page = options.delete :limit
       @current_page = options.delete :page
-      @total_pages = (total.to_f / per_page).ceil
+      @total_pages = total.quo(per_page).ceil
       @next_page = current_page + 1 unless current_page >= total_pages
       @previous_page = current_page - 1 unless current_page <= 1
     end
