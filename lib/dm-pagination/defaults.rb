@@ -18,12 +18,12 @@ module DataMapper
     }
 
     ##
-    # Default values used by the paginator
+    # Default pagination values.
     #
     # === Options
     #
-    #   :records_per_page      Records per page; defaults to 6
-    #   :page_window           Number of intermediate page number links to be shown; Defaults to 7
+    #   :per_page              Records per page; defaults to 6
+    #   :size                  Number of intermediate page number links to be shown; Defaults to 7
     #   :pager_class           Class for the div that contains the pagination links, defaults to 'pager'
     #   :previous_text         Text for the 'previous' link, defaults to 'Previous'
     #   :next_text             Text for the 'next' link, defaults to 'Next'
@@ -36,8 +36,9 @@ module DataMapper
     #   :page_link_class       CSS class for intermediate page links (will be suffixed with the actual page number)
     #   :more_class            CSS class for the more placeholder
     #
-    # Set +nil+ for the CSS classes when you don't want classes to be applied to the links.
+    # Class related defaults may be set to nil to prevent their usage.
     #
+    
     def self.defaults
       @@defaults
     end

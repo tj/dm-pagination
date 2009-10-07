@@ -5,7 +5,15 @@ describe DataMapper::Pagination do
   before(:each) { mock_items }
   
   describe "#page" do
-    it "should default page to 1, :per_page to 6, and :order to :id.desc" do
+    it "should default page to 1" do
+      Item.page.pager.current_page.should == 1
+    end
+    
+    it "should default :per_page to 6" do
+      Item.page.length.should == 6
+    end
+    
+    it "should default :order to [:id.desc]" do
       Item.page.should == items(15, 20).reverse
     end
 
