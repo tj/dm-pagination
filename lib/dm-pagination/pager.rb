@@ -69,21 +69,21 @@ module DataMapper
     end
     
     def link_to page, contents = nil
-      %(<a href="#{uri_for(page)}" class="link-#{(contents ||= page).to_s.downcase.tr(' ', '-')}">#{contents}</a>)
+      %(<a href="#{uri_for(page)}">#{contents || page}</a>)
     end
     
     def more position
-      return '' if position == :before && (current_page <= 1 || first_page_link <= 1)
-      return '' if position == :after && (current_page >= total_pages || last_page_link >= total_pages)
+      return '' if position == :before && (current_page <= 1 || first <= 1)
+      return '' if position == :after && (current_page >= total_pages || last >= total_pages)
       %(<li class="more">...</li>\n)
     end
     
     def intermediate_links
-      (first_page_link..last_page_link).map { |n|
-        (n == current_page ? 
+      (first..last).map do |page|
+        (page == current_page ? 
           '<li class="active">%s</li>' : 
-            '<li>%s</li>') % link_to(n)
-      }
+            '<li>%s</li>') % link_to(page)
+      end
     end
     
     def previous_link
@@ -102,7 +102,7 @@ module DataMapper
       previous_page ? link_to(1, Pagination.defaults[:first_text]) : ''
     end
 
-    def first_page_link
+    def first
       first = [current_page - @size, 1].max
       if (current_page - total_pages).abs < @size
         first = [first - (@size - (current_page - total_pages).abs), 1].max
@@ -110,7 +110,7 @@ module DataMapper
       first
     end
 
-    def last_page_link
+    def last
       last = [current_page + @size, total_pages].min
       if @size >= current_page
         last = [last + (@size - current_page) + 1, total_pages].min
