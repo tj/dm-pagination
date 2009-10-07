@@ -1,5 +1,5 @@
 
-require File.dirname(__FILE__) + '/spec_helper'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 describe DataMapper::Pagination do
   before(:each) { mock_items }
