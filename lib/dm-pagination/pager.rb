@@ -68,15 +68,24 @@ module DataMapper
       '</ul>' + next_link + last_link + '</div>'
     end
     
+    ##
+    # Link to _page_ with optional anchor tag _contents_. 
+    
     def link_to page, contents = nil
       %(<a href="#{uri_for(page)}" class="#{contents.to_s.downcase.tr(' ', '-')}">#{contents || page}</a>)
     end
+    
+    ##
+    # More pages indicator for _position_.
     
     def more position
       return '' if position == :before && (current_page <= 1 || first <= 1)
       return '' if position == :after && (current_page >= total_pages || last >= total_pages)
       %(<li class="more">...</li>\n)
     end
+    
+    ##
+    # Intermediate page links array.
     
     def intermediate_links
       (first..last).map do |page|
@@ -88,21 +97,36 @@ module DataMapper
       end
     end
     
+    ##
+    # Previous link.
+    
     def previous_link
       previous_page ? link_to(previous_page, Pagination.defaults[:previous_text]) : ''
     end
+    
+    ##
+    # Next link.
     
     def next_link
       next_page ? link_to(next_page, Pagination.defaults[:next_text]) : ''
     end
     
+    ##
+    # Last link.
+    
     def last_link
       next_page ? link_to(total_pages, Pagination.defaults[:last_text]) : ''
     end
     
+    ##
+    # First link.
+    
     def first_link
       previous_page ? link_to(1, Pagination.defaults[:first_text]) : ''
     end
+    
+    ##
+    # Determine first intermediate page.
 
     def first
       first = [current_page - @size, 1].max
@@ -111,6 +135,9 @@ module DataMapper
       end
       first
     end
+    
+    ##
+    # Determine last intermediate page.
 
     def last
       last = [current_page + @size, total_pages].min
@@ -119,6 +146,15 @@ module DataMapper
       end
       last
     end
+    
+    ##
+    # Uri for _page_. The following conversions are made
+    # to the _uri_ previously passed to #to_html:
+    #
+    #   /items          # Appends query string => /items?page=2
+    #   /items?page=1   # Adjusts current page => /items?page=2
+    #   /items?foo=bar  # Appends page pair    => /items?foo=bar&page=1
+    #
 
     def uri_for page
       @uri['page'] ?
