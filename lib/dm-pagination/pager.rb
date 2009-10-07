@@ -47,12 +47,17 @@ module DataMapper
     ##
     # Render the pager with the given _options_.
     #
+    # === Arguments
+    #
+    #   base_path   The base path for the generated links, e.g. /projects/popular
+    #
     # === Options
     #
     #   :size   Number of intermediate page number links to be shown; Defaults to 7
     #
     
-    def to_html options = {}
+    def to_html base_path, options = {}
+      @base_path = base_path
       @size = options.delete(:size) || 7
       return if total_pages <= 0
       @offset = current_page < @size ? 0 : 
@@ -66,9 +71,9 @@ module DataMapper
       '</ul>' + next_link + last_link + '</div>'
     end
     
-    def link_to uri, contents = nil
-      contents ||= uri
-      %(<a href="#{uri}" class="link-#{contents.to_s.downcase.tr(' ', '-')}">#{contents}</a>)
+    def link_to page, contents = nil
+      contents ||= page
+      %(<a href="#{build_uri(page)}" class="link-#{contents.to_s.downcase.tr(' ', '-')}">#{contents}</a>)
     end
     
     def more position
@@ -99,6 +104,16 @@ module DataMapper
     
     def first_link
       previous_page ? link_to(1, 'First') : ''
+    end
+    
+    def build_uri(page)
+      if @base_path =~ /page=\d+/
+        @base_path.gsub(/page=\d+/, "page=#{page}")
+      elsif @base_path =~ /\?/
+        @base_path += "&page=#{page}"
+      else
+        @base_path += "?page=#{page}"
+      end
     end
     
   end
