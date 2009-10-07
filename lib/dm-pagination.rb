@@ -29,8 +29,20 @@ require 'dm-pagination/pagination'
 require 'dm-pagination/pager'
 require 'dm-pagination/view_helper'
 
+#--
+# DataMapper
+#++
+
 DataMapper::Model.send :include, DataMapper::Pagination
 DataMapper::Collection.send :include, DataMapper::Pagination
 DataMapper::Query.send :include, DataMapper::Pagination
 
-ActionView::Base.send :include, DataMapper::Pagination::ViewHelper::Rails if defined?(ActionView::Base)
+#--
+# Rails
+#++
+
+if defined? ActionView::Base
+  require 'dm-pagination/view_helper'
+  ActionView::Base.send :include, DataMapper::Pagination::ViewHelper::Rails
+end
+
