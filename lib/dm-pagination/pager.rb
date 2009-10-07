@@ -163,11 +163,11 @@ module DataMapper
     #
 
     def uri_for page
-      @uri['page'] ?
-        @uri.gsub(/page=\d+/, "page=#{page}") :
-          @uri['?'] ?
-            @uri += "&page=#{page}" :
-              @uri += "?page=#{page}"
+      case @uri
+      when /page=/ ; @uri.gsub /page=\d+/, "page=#{page}"
+      when /\?/    ; @uri += "&page=#{page}"
+      else         ; @uri += "?page=#{page}"
+      end
     end
     
   end
