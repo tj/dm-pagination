@@ -45,11 +45,12 @@ module DataMapper
     end
     
     ##
-    # Render the pager with the given _options_.
+    # Render the pager with the given _base_path_ and _options_.
+    # 
+    # === Examples
     #
-    # === Arguments
-    #
-    #   base_path   The base path for the generated links, e.g. /projects/popular
+    #   User.page(2).pager.to_html('/users')
+    #   User.page(2).pager.to_html('/users', :page_window => 3)
     #
     # === Options
     #

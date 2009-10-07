@@ -73,6 +73,11 @@ RSpec:
     $ rake spec:select SPEC=spec/pager_spec.rb
     $ spec --color spec
     
+## Authors
+
+ * TJ Holowaychuk <tj@vision-media.ca>
+ * marcoow
+    
 ## License
 
 (The MIT License)
