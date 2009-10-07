@@ -22,11 +22,11 @@ Accessing the pager instance:
     // => #<DataMapper::Pager:0x1610f20 @per_page=4, @next_page=2, @total_pages=3, @total=10, @current_page=1>
     
 Converting to HTML:
-    Item.page(2).pager.to_html
+    Item.page(2).pager.to_html('/items')
     // => "<div class=\"pager\">..."
     
 Alter the number of intermediate numbered links displayed, defaults to 7
-    Item.page(2).pager.to_html(:size => 3)
+    Item.page(2).pager.to_html('/items', :size => 3)
     // => "<div class=\"pager\">..."
     
 # Output
@@ -35,31 +35,33 @@ Output is displayed in a format similar to below, although
 with CSS you may hide anything you wish to remove. There is
 no need to provide an API for this.
 
-    Item.page(2).pager.to_html(:size => 3)
+    Item.page(2).pager.to_html('/items', :size => 3)
     // => First Previous 1 [2] 3 ... Next Last
     
-    Item.page.pager.to_html
+    Item.page.pager.to_html '/items'
     // => [1] 2 3 4 5 6 7 ... Next Last
 
-    Item.page(5).pager.to_html(:size => 5)
+    Item.page(5).pager.to_html('/items', :size => 5)
     // => First Previous ... 3 4 [5] 6 7 ... Next Last
     
 # Markup
 
-Below is sample markup produced:
+Sample query:
+    Item.page(2, :per_page => 2).pager.to_html("/items", :size => 3)
+
+Sample markup:
 
     <div class="pager">
-      <a href="1" class="link-first">First</a>
-      <a href="3" class="link-previous">Previous</a>
+      <a href="/items?page=1" class="first">First</a>
+      <a href="/items?page=1" class="previous">Previous</a>
       <ul>
-        <li class="more">...</li>
-        <li><a href="3" class="link-3">3</a></li>
-        <li class="active"><a href="4" class="link-4">4</a></li>
-        <li><a href="5" class="link-5">5</a></li>
+        <li class="page-1 first"><a href="/items?page=1" class="">1</a></li>
+        <li class="active page-2"><a href="/items?page=2" class="">2</a></li>
+        <li class="page-3 last"><a href="/items?page=3" class="">3</a></li>
         <li class="more">...</li>
       </ul>
-      <a href="5" class="link-next">Next</a>
-      <a href="10" class="link-last">Last</a>
+      <a href="/items?page=3" class="next">Next</a>
+      <a href="/items?page=5" class="last">Last</a>
     </div>
     
 ## Running Specs
