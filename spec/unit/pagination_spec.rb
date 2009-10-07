@@ -14,6 +14,10 @@ describe DataMapper::Pagination do
       Item.page(-1).pager.current_page.should == 1
     end
     
+    it "should treat nil as the first page" do
+      Item.page(nil).pager.current_page.should == 1
+    end
+    
     it "should default :per_page to 6" do
       Item.page.length.should == 6
     end

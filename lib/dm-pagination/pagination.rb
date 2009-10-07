@@ -22,7 +22,7 @@ module DataMapper
     
     def page current_page = 1, options = {}
       options, current_page = current_page, 1 if current_page.is_a? Hash
-      current_page = 1 if current_page < 1
+      current_page = 1 unless Numeric === current_page && current_page > 1
       query = options.dup
       collection = new_collection scoped_query(options = {
         :limit => per_page = (query.delete(:per_page) || Pagination.defaults[:per_page]),
