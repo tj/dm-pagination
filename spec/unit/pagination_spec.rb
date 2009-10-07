@@ -80,6 +80,13 @@ describe DataMapper::Pagination do
           Item.page(3, :per_page => '3', :order => [:id.asc]).should == items(7, 9)
           Item.page(3, :per_page => '3', :order => [:id.asc]).pager.per_page.should == 3
         end
+        
+        it "should delete keys when an indifferent hash is passed" do
+          Item.page(1, 'per_page' => '3', :order => [:id.asc]).should == items(1, 3)
+          Item.page(2, 'per_page' => '3', :order => [:id.asc]).should == items(4, 6)
+          Item.page(3, 'per_page' => '3', :order => [:id.asc]).should == items(7, 9)
+          Item.page(3, 'per_page' => '3', :order => [:id.asc]).pager.per_page.should == 3
+        end
       end
       
       describe ":order" do
