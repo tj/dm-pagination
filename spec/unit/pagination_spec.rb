@@ -30,6 +30,10 @@ describe DataMapper::Pagination do
     it "should default :order to [:id.desc]" do
       Item.page.should == items(15, 20).reverse
     end
+    
+    it "should allow :page as a hash param" do
+      Item.page(:page => 2, :order => [:id.asc]).should == items(7, 12)
+    end
 
     it "should allow a hash of options as the first parameter" do
       Item.page(:order => [:id.asc]).should == items(1, 6)

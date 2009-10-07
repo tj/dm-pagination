@@ -17,11 +17,15 @@ module DataMapper
     #
     # === Examples
     #    
-    #   User.all.
+    #   User.all.page
+    #   User.all.page(2)
+    #   User.all.page(2, :per_page => 5)
+    #   User.all.page(:page => 2, :per_page => 5)
     #
     
     def page current_page = 1, options = {}
-      options, current_page = current_page, 1 if current_page.is_a? Hash
+      options, current_page = current_page, nil if current_page.is_a? Hash
+      current_page ||= options.delete :page
       current_page = 1 unless (current_page = current_page.to_i) && current_page > 1
       query = options.dup
       collection = new_collection scoped_query(options = {
