@@ -122,13 +122,11 @@ module DataMapper
     end
 
     def uri_for page
-      if @base_path =~ /page=\d+/
-        @base_path.gsub(/page=\d+/, "page=#{page}")
-      elsif @base_path =~ /\?/
-        @base_path += "&page=#{page}"
-      else
-        @base_path += "?page=#{page}"
-      end
+      @base_path['page'] ?
+        @base_path.gsub(/page=\d+/, "page=#{page}") :
+          @base_path['?'] ?
+            @base_path += "&page=#{page}" :
+              @base_path += "?page=#{page}"
     end
     
   end
