@@ -71,6 +71,7 @@ RSpec:
     $ rake spec
     $ rake spec:verbose
     $ rake spec:select SPEC=spec/pager_spec.rb
+    $ spec --color spec
     
 ## License
 
