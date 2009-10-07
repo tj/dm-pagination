@@ -58,27 +58,27 @@ module DataMapper
     
     def to_html base_path, options = {}
       @base_path = base_path
-      @size = options.delete(:size) || DataMapper::Pagination.defaults[:page_window]
+      @size = options.delete(:size) || Pagination.defaults[:page_window]
       return if total_pages <= 0
       @offset = current_page < @size ? 0 : 
           total - current_page < @size ?
             total - @size : 
               current_page - @size / 2 - 1
-      "<div class=\"#{DataMapper::Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
+      "<div class=\"#{Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
       more(:before) +
       intermediate_links[@offset, @size].join("\n") + 
       more(:after) +
       '</ul>' + next_link + last_link + '</div>'
     end
     
-    def link_to page, contents = nil
+    def link_to page, css_class, contents = nil
       contents ||= page
-      %(<a href="#{build_uri(page)}" class="link-#{contents.to_s.downcase.tr(' ', '-')}">#{contents}</a>)
+      %(<a href="#{build_uri(page)}"#{ " class=\"#{css_class}\"" if css_class}>#{contents}</a>)
     end
     
     def more position
       return '' if position == :before && @offset == 0
-      %(<li class="more">...</li>\n)
+      %(<li#{Pagination.defaults[:more_class] ? " class=\"#{Pagination.defaults[:more_class]}\"" : ''}>...</li>\n)
     end
     
     def intermediate_links
@@ -86,24 +86,24 @@ module DataMapper
       (1..@size || total_pages).map { |n|
         (n == current_page ? 
           '<li class="active">%s</li>' : 
-            '<li>%s</li>') % link_to(n)
+            '<li>%s</li>') % link_to(n, Pagination.defaults[:page_link_class] ? "#{Pagination.defaults[:page_link_class]}#{n}" : nil)
       }
     end
     
     def previous_link
-      previous_page ? link_to(previous_page, DataMapper::Pagination.defaults[:previous_text]) : ''
+      previous_page ? link_to(previous_page, Pagination.defaults[:previous_link_class], Pagination.defaults[:previous_text]) : ''
     end
     
     def next_link
-      next_page ? link_to(next_page, DataMapper::Pagination.defaults[:next_text]) : ''
+      next_page ? link_to(next_page, Pagination.defaults[:next_link_class], Pagination.defaults[:next_text]) : ''
     end
     
     def last_link
-      next_page ? link_to(total, DataMapper::Pagination.defaults[:last_text]) : ''
+      next_page ? link_to(total, Pagination.defaults[:last_link_class], Pagination.defaults[:last_text]) : ''
     end
     
     def first_link
-      previous_page ? link_to(1, DataMapper::Pagination.defaults[:first_text]) : ''
+      previous_page ? link_to(1, Pagination.defaults[:first_link_class], Pagination.defaults[:first_text]) : ''
     end
     
     def build_uri(page)

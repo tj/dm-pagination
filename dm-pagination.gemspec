@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.date = %q{2009-10-07}
   s.description = %q{DataMapper Pagination}
   s.email = %q{tj@vision-media.ca}
-  s.extra_rdoc_files = ["lib/dm-pagination.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake"]
-  s.files = ["History.md", "Rakefile", "Readme.md", "lib/dm-pagination.rb", "spec/pagination_spec.rb", "spec/pager_spec.rb", "spec/view_helper_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake", "Manifest", "dm-pagination.gemspec"]
+  s.extra_rdoc_files = ["lib/dm-pagination.rb", "lib/dm-pagination/pager.rb", "lib/dm-pagination/pagination.rb", "lib/dm-pagination/version.rb", "lib/dm-pagination/view_helper.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake"]
+  s.files = ["History.md", "Rakefile", "Readme.md", "lib/dm-pagination.rb", "lib/dm-pagination/pager.rb", "lib/dm-pagination/pagination.rb", "lib/dm-pagination/version.rb", "lib/dm-pagination/view_helper.rb", "spec/pagination_spec.rb", "spec/pager_spec.rb", "spec/view_helper_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake", "Manifest", "dm-pagination.gemspec"]
   s.homepage = %q{http://github.com/visionmedia/dm-pagination}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Dm-pagination", "--main", "Readme.md"]
   s.require_paths = ["lib"]

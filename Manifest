@@ -2,6 +2,10 @@ History.md
 Rakefile
 Readme.md
 lib/dm-pagination.rb
+lib/dm-pagination/pager.rb
+lib/dm-pagination/pagination.rb
+lib/dm-pagination/version.rb
+lib/dm-pagination/view_helper.rb
 spec/pagination_spec.rb
 spec/pager_spec.rb
 spec/view_helper_spec.rb
