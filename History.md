@@ -3,6 +3,7 @@
 
   * added view helper for Rails
   * fixed Pager#to_html (needs to know the base path of the current URL)
+  * added settings
 
 0.0.1 / YYYY-MM-DD
 ==================

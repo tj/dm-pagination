@@ -2,7 +2,9 @@ History.md
 Rakefile
 Readme.md
 lib/dm-pagination.rb
-spec/pagination_model_spec.rb
+spec/pagination_spec.rb
+spec/pager_spec.rb
+spec/view_helper_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/docs.rake

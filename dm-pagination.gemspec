@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2009-10-06}
+  s.date = %q{2009-10-07}
   s.description = %q{DataMapper Pagination}
   s.email = %q{tj@vision-media.ca}
   s.extra_rdoc_files = ["lib/dm-pagination.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake"]
-  s.files = ["History.md", "Rakefile", "Readme.md", "lib/dm-pagination.rb", "spec/pagination_model_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake", "Manifest", "dm-pagination.gemspec"]
+  s.files = ["History.md", "Rakefile", "Readme.md", "lib/dm-pagination.rb", "spec/pagination_spec.rb", "spec/pager_spec.rb", "spec/view_helper_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake", "Manifest", "dm-pagination.gemspec"]
   s.homepage = %q{http://github.com/visionmedia/dm-pagination}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Dm-pagination", "--main", "Readme.md"]
   s.require_paths = ["lib"]
