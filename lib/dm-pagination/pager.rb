@@ -64,9 +64,7 @@ module DataMapper
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
       "<div class=\"#{Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
-      more(:before) +
-      intermediate_links.join("\n") + 
-      more(:after) +
+      more(:before) + intermediate_links.join("\n") + more(:after) +
       '</ul>' + next_link + last_link + '</div>'
     end
     
