@@ -131,22 +131,26 @@ module DataMapper
     # Determine first intermediate page.
 
     def first
-      first = [current_page - @size, 1].max
-      if (current_page - total_pages).abs < @size
-        first = [first - (@size - (current_page - total_pages).abs), 1].max
+      @first ||= begin
+        first = [current_page - @size, 1].max
+        if (current_page - total_pages).abs < @size
+          first = [first - (@size - (current_page - total_pages).abs), 1].max
+        end
+        first
       end
-      first
     end
     
     ##
     # Determine last intermediate page.
 
     def last
-      last = [current_page + @size, total_pages].min
-      if @size >= current_page
-        last = [last + (@size - current_page) + 1, total_pages].min
+      @last ||= begin
+        last = [current_page + @size, total_pages].min
+        if @size >= current_page
+          last = [last + (@size - current_page) + 1, total_pages].min
+        end
+        last
       end
-      last
     end
     
     ##
