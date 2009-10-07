@@ -31,7 +31,7 @@ module DataMapper
       page = 1 unless (page = page.to_i) && page > 1
       query = options.dup
       collection = new_collection scoped_query(options = {
-        :limit => per_page = (query.delete(:per_page) || Pagination.defaults[:per_page]),
+        :limit => per_page = (query.delete(:per_page) || Pagination.defaults[:per_page]).to_i,
         :offset => (page - 1) * per_page,
         :order => [:id.desc]
       }.merge(query))
