@@ -80,7 +80,7 @@ RSpec:
 ## Authors
 
  * TJ Holowaychuk <tj@vision-media.ca>
- * marcoow
+ * Marco Otte-Witte <http://simplabs.com>
     
 ## License
 
