@@ -97,8 +97,8 @@ module DataMapper
     
     def intermediate_links
       (first..last).map do |page|
-        classes = current_page == page ? ['active'] : []
-        classes << "page-#{page}"
+        classes = ["page-#{page}"]
+        classes << 'active' if current_page == page
         li classes.join(' '), link_to(page)
       end
     end
