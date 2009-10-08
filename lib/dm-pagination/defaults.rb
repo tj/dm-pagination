@@ -8,7 +8,8 @@ module DataMapper
       :previous_text       => 'Previous',
       :next_text           => 'Next',
       :first_text          => 'First',
-      :last_text           => 'Last'
+      :last_text           => 'Last',
+      :more_text           => '...'
     }
 
     ##
@@ -23,6 +24,7 @@ module DataMapper
     #   :next_text             Text for the 'next' link, defaults to 'Next'
     #   :first_text            Text for the 'first' link, defaults to 'First'
     #   :last_text             Text for the 'last' link, defaults to 'Last'
+    #   :more_text             Text for the 'more' indicator, defaults to '...'
     #
     
     def self.defaults

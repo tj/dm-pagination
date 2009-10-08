@@ -83,7 +83,7 @@ module DataMapper
     def more position
       return '' if position == :before && (current_page <= 1 || first <= 1)
       return '' if position == :after && (current_page >= total_pages || last >= total_pages)
-      %(<li class="more">...</li>\n)
+      %(<li class="more">#{Pagination.defaults[:more_text]}</li>\n)
     end
     
     ##
