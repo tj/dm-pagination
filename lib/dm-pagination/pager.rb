@@ -107,28 +107,28 @@ module DataMapper
     # Previous link.
     
     def previous_link
-      previous_page ? li('previous jump', link_to(previous_page, Pagination.defaults[:previous_text])) : ''
+      li 'previous jump', link_to(previous_page, Pagination.defaults[:previous_text]) if previous_page
     end
     
     ##
     # Next link.
     
     def next_link
-      next_page ? li('next jump', link_to(next_page, Pagination.defaults[:next_text])) : ''
+      li 'next jump', link_to(next_page, Pagination.defaults[:next_text]) if next_page
     end
     
     ##
     # Last link.
     
     def last_link
-      next_page ? li('last jump', link_to(total_pages, Pagination.defaults[:last_text])) : ''
+      li 'last jump', link_to(total_pages, Pagination.defaults[:last_text]) if next_page
     end
     
     ##
     # First link.
     
     def first_link
-      previous_page ? li('first jump', link_to(1, Pagination.defaults[:first_text])) : ''
+      li 'first jump', link_to(1, Pagination.defaults[:first_text]) if previous_page
     end
     
     ##
