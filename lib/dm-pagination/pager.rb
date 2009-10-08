@@ -93,8 +93,6 @@ module DataMapper
       (first..last).map do |page|
         classes = current_page == page ? ['active'] : []
         classes << "page-#{page}"
-        classes << 'first' if first == page
-        classes << 'last' if last == page
         li(classes.join(' ')) { link_to(page) }
       end
     end

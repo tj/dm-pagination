@@ -15,7 +15,7 @@ describe DataMapper::Pager do
       end
       
       it "should add the 'active' class to the current page link <li>" do
-        Item.page.pager.to_html('/').should include('li class="active page-1 first"><a href="/?page=1"')
+        Item.page.pager.to_html('/').should include('li class="active page-1"><a href="/?page=1"')
         Item.page(2).pager.to_html('/').should include('li class="active page-2"><a href="/?page=2"')
         Item.page(3).pager.to_html('/').should include('li class="active page-3"><a href="/?page=3"')
       end
@@ -57,6 +57,7 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ... after" do
         markup = Item.page.pager.to_html('/', :size => 3)
+        puts markup
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
