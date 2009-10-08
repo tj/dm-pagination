@@ -63,9 +63,9 @@ module DataMapper
       @size = options.fetch :size, Pagination.defaults[:size]
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
-      "<div class=\"#{Pagination.defaults[:pager_class]}\">" + first_link + previous_link + '<ul>' + 
+      "<ul class=\"#{Pagination.defaults[:pager_class]}\">" + first_link + previous_link + 
       more(:before) + intermediate_links.join("\n") + more(:after) +
-      '</ul>' + next_link + last_link + '</div>'
+      next_link + last_link + '</ul>'
     end
     
     private
@@ -74,7 +74,7 @@ module DataMapper
     # Link to _page_ with optional anchor tag _contents_. 
     
     def link_to page, contents = nil
-      %(<a href="#{uri_for(page)}" class="#{contents.to_s.downcase.tr(' ', '-')}">#{contents || page}</a>)
+      %(<a href="#{uri_for(page)}">#{contents || page}</a>)
     end
     
     ##
@@ -83,7 +83,7 @@ module DataMapper
     def more position
       return '' if position == :before && (current_page <= 1 || first <= 1)
       return '' if position == :after && (current_page >= total_pages || last >= total_pages)
-      %(<li class="more">#{Pagination.defaults[:more_text]}</li>\n)
+      li('more') { Pagination.defaults[:more_text] }
     end
     
     ##
@@ -95,7 +95,7 @@ module DataMapper
         classes << "page-#{page}"
         classes << 'first' if first == page
         classes << 'last' if last == page
-        '<li class="%s">%s</li>' % [classes.join(' '), link_to(page)]
+        li(classes.join(' ')) { link_to(page) }
       end
     end
     
@@ -103,28 +103,28 @@ module DataMapper
     # Previous link.
     
     def previous_link
-      previous_page ? link_to(previous_page, Pagination.defaults[:previous_text]) : ''
+      previous_page ? li('previous') { link_to(previous_page, Pagination.defaults[:previous_text]) } : ''
     end
     
     ##
     # Next link.
     
     def next_link
-      next_page ? link_to(next_page, Pagination.defaults[:next_text]) : ''
+      next_page ? li('next') { link_to(next_page, Pagination.defaults[:next_text]) } : ''
     end
     
     ##
     # Last link.
     
     def last_link
-      next_page ? link_to(total_pages, Pagination.defaults[:last_text]) : ''
+      next_page ? li('last') { link_to(total_pages, Pagination.defaults[:last_text]) } : ''
     end
     
     ##
     # First link.
     
     def first_link
-      previous_page ? link_to(1, Pagination.defaults[:first_text]) : ''
+      previous_page ? li('first') { link_to(previous_page, Pagination.defaults[:first_text]) } : ''
     end
     
     ##
@@ -151,6 +151,14 @@ module DataMapper
         end
         last
       end
+    end
+    
+    ##
+    # Renders a <li> with the given class
+    # and content from the given block.
+    
+    def li css_class = nil, &block
+      "<li#{%( class="#{css_class}") if css_class}>#{yield}</li>\n"
     end
     
     ##

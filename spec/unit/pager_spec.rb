@@ -6,12 +6,12 @@ describe DataMapper::Pager do
   
   describe "#to_html" do
     describe "when pages are available" do
-      it "should render a div.pager wrapper" do
-        Item.page.pager.to_html('/').should include('<div class="pager">')
+      it "should render a ul.pager wrapper" do
+        Item.page.pager.to_html('/').should match(/ul class="([^"]+)?"/)
       end
       
       it "should render a ul containing intermediate items" do
-        Item.page.pager.to_html('/').should include('<ul><li')
+        Item.page.pager.to_html('/').should match(/<ul class="[^"]+?"><li/)
       end
       
       it "should add the 'active' class to the current page link <li>" do
@@ -20,20 +20,20 @@ describe DataMapper::Pager do
         Item.page(3).pager.to_html('/').should include('li class="active page-3"><a href="/?page=3"')
       end
       
-      it "should add a.last" do
-        Item.page.pager.to_html('/').should include('class="last">Last')
+      it "should add li.last" do
+        Item.page.pager.to_html('/').should include('<li class="last">')
       end
       
-      it "should add a.first" do
-        Item.page(2).pager.to_html('/').should include('class="first">First')
+      it "should add li.first" do
+        Item.page(2).pager.to_html('/').should include('<li class="first"')
       end
       
-      it "should add a.next" do
-        Item.page.pager.to_html('/').should include('class="next">Next')
+      it "should add li.next" do
+        Item.page.pager.to_html('/').should include('<li class="next">')
       end
       
-      it "should add a.previous" do
-        Item.page(2).pager.to_html('/').should include('class="previous">Previous')
+      it "should add li.previous" do
+        Item.page(2).pager.to_html('/').should include('<li class="previous">')
       end
     end
     
@@ -61,12 +61,12 @@ describe DataMapper::Pager do
         markup.should include('>2<')
         markup.should include('>3<')
         markup.should_not include('>4<')
-        markup.should include(%(<li class="more">...</li>\n</ul>))
+        markup.should include(%(<li class="more">...</li>\n<li class="next"))
       end
       
       it "should not render ... before" do
         markup = Item.page.pager.to_html('/', :size => 3)
-        markup.should_not include('<ul><li class="more">...<')
+        markup.should_not include('<a href="/?page=3" class="previous">Previous</a><li class="more">...</li>')
       end
       
       it "should not render the 'First' page link" do
@@ -112,7 +112,7 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ... before" do
         markup = Item.page(4).pager.to_html('/', :size => 3)
-        markup.should include('<ul><li class="more">...<')
+        markup.should include(%(<li class="previous"><a href="/?page=3">Previous</a></li>\n<li class="more">...<))
         markup.should_not include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')
@@ -122,7 +122,7 @@ describe DataMapper::Pager do
       
       it "should not render ... after" do
         markup = Item.page(4).pager.to_html('/', :size => 3)
-        markup.should_not include(%(<li class="more">...</li>\n</ul>))
+        markup.should_not include(%(<li class="more">...</li>\n<a href="/?page=6" class="next"))
       end
     end
     
@@ -139,13 +139,13 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ... before and after" do
         markup = Item.page(5, :per_page => 2).pager.to_html('/', :size => 3)
-        markup.should include('<ul><li class="more">...<')
+        markup.should include(%(<li class="previous"><a href="/?page=4">Previous</a></li>\n<li class="more">...</li>))
         markup.should_not include('>3<')
         markup.should include('>4<')
         markup.should include('>5<')
         markup.should include('>6<')
         markup.should_not include('>7<')
-        markup.should include(%(<li class="more">...</li>\n</ul>))
+        markup.should include(%(<li class="more">...</li>\n<li class="next"))
       end
       
       it "should render the 'Last' page link" do
@@ -167,20 +167,20 @@ describe DataMapper::Pager do
         markup.should include('>2<')
         markup.should include('>3<')
         markup.should_not include('>4<')
-        markup.should include(%(<li class="more">...</li>\n</ul>))
+        markup.should include(%(<li class="more">...</li>\n<li class="next"))
       end
     end
     
     describe "when on the second last page" do
       it "should render 8 through 10 when :size is 3 with preceding ..." do
         markup = Item.page(9, :per_page => 2).pager.to_html('/', :size => 3)
-        markup.should include('<ul><li class="more">...<')
+        markup.should include(%(<li class="previous"><a href="/?page=8">Previous</a></li>\n<li class="more">...<))
         markup.should_not include('>7<')
         markup.should include('>8<')
         markup.should include('>9<')
         markup.should include('>10<')
         markup.should_not include('>11<')
-        markup.should_not include(%(<li class="more">...</li>\n</ul>))
+        markup.should_not include(%(<li class="more">...</li>\n<li class="next"))
       end
     end
     
