@@ -94,6 +94,15 @@ describe DataMapper::Pager do
       end
     end
     
+    [:first, :previous, :next, :last].each do |pos|
+      describe "with the #{pos.inspect} option set" do
+        it "should change the default contents for the '#{pos}' link" do
+          markup = Item.page(2, :per_page => 2).pager.to_html('/', :"#{pos}_text" => 'FOO')
+          markup.should include('>FOO<')
+        end
+      end
+    end
+    
     describe "when on the last page" do
       it "should not render the 'Next' page link" do
         markup = Item.page(4).pager.to_html('/')

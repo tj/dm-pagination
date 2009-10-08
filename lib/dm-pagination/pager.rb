@@ -59,8 +59,8 @@ module DataMapper
     
     def to_html uri, options = {}
       return unless total_pages > 1
-      @uri = uri
-      @size = options.fetch :size, Pagination.defaults[:size]
+      @uri, @options = uri, options
+      @size = option :size
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
       [%(<ul class="#{Pagination.defaults[:pager_class]}">),
@@ -77,6 +77,14 @@ module DataMapper
     private
     
     ##
+    # Fetch _key_ from the options passed to #to_html, or
+    # its default value.
+    
+    def option key
+      @options.fetch key, Pagination.defaults[key]
+    end
+    
+    ##
     # Link to _page_ with optional anchor tag _contents_. 
     
     def link_to page, contents = nil
@@ -89,7 +97,7 @@ module DataMapper
     def more position
       return '' if position == :before && (current_page <= 1 || first <= 1)
       return '' if position == :after && (current_page >= total_pages || last >= total_pages)
-      li 'more', Pagination.defaults[:more_text]
+      li 'more', option(:more_text)
     end
     
     ##
@@ -107,28 +115,28 @@ module DataMapper
     # Previous link.
     
     def previous_link
-      li 'previous jump', link_to(previous_page, Pagination.defaults[:previous_text]) if previous_page
+      li 'previous jump', link_to(previous_page, option(:previous_text)) if previous_page
     end
     
     ##
     # Next link.
     
     def next_link
-      li 'next jump', link_to(next_page, Pagination.defaults[:next_text]) if next_page
+      li 'next jump', link_to(next_page, option(:next_text)) if next_page
     end
     
     ##
     # Last link.
     
     def last_link
-      li 'last jump', link_to(total_pages, Pagination.defaults[:last_text]) if next_page
+      li 'last jump', link_to(total_pages, option(:last_text)) if next_page
     end
     
     ##
     # First link.
     
     def first_link
-      li 'first jump', link_to(1, Pagination.defaults[:first_text]) if previous_page
+      li 'first jump', link_to(1, option(:first_text)) if previous_page
     end
     
     ##

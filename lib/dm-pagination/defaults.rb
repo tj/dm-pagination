@@ -1,7 +1,8 @@
+
 module DataMapper
   module Pagination
 
-    @@defaults = {
+    @defaults = {
       :per_page      => 6,
       :size          => 7,
       :pager_class   => 'pager',
@@ -28,7 +29,7 @@ module DataMapper
     #
     
     def self.defaults
-      @@defaults
+      @defaults
     end
 
   end
