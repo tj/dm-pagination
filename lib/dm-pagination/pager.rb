@@ -89,7 +89,7 @@ module DataMapper
     def more position
       return '' if position == :before && (current_page <= 1 || first <= 1)
       return '' if position == :after && (current_page >= total_pages || last >= total_pages)
-      li('more') { Pagination.defaults[:more_text] }
+      li 'more', Pagination.defaults[:more_text]
     end
     
     ##
@@ -99,7 +99,7 @@ module DataMapper
       (first..last).map do |page|
         classes = current_page == page ? ['active'] : []
         classes << "page-#{page}"
-        li(classes.join(' ')) { link_to(page) }
+        li classes.join(' '), link_to(page)
       end
     end
     
@@ -107,28 +107,28 @@ module DataMapper
     # Previous link.
     
     def previous_link
-      previous_page ? li('previous jump') { link_to(previous_page, Pagination.defaults[:previous_text]) } : ''
+      previous_page ? li('previous jump', link_to(previous_page, Pagination.defaults[:previous_text])) : ''
     end
     
     ##
     # Next link.
     
     def next_link
-      next_page ? li('next jump') { link_to(next_page, Pagination.defaults[:next_text]) } : ''
+      next_page ? li('next jump', link_to(next_page, Pagination.defaults[:next_text])) : ''
     end
     
     ##
     # Last link.
     
     def last_link
-      next_page ? li('last jump') { link_to(total_pages, Pagination.defaults[:last_text]) } : ''
+      next_page ? li('last jump', link_to(total_pages, Pagination.defaults[:last_text])) : ''
     end
     
     ##
     # First link.
     
     def first_link
-      previous_page ? li('first jump') { link_to(1, Pagination.defaults[:first_text]) } : ''
+      previous_page ? li('first jump', link_to(1, Pagination.defaults[:first_text])) : ''
     end
     
     ##
@@ -158,11 +158,10 @@ module DataMapper
     end
     
     ##
-    # Renders a <li> with the given class
-    # and content from the given block.
+    # Renders a <li> with the given _css_class_ and _contents_.
     
-    def li css_class = nil, &block
-      "<li#{%( class="#{css_class}") if css_class}>#{yield}</li>\n"
+    def li css_class = nil, contents = nil
+      "<li#{%( class="#{css_class}") if css_class}>#{contents}</li>\n"
     end
     
     ##
