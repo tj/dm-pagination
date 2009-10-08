@@ -1,6 +1,6 @@
 
 module DataMapper::Pagination
-  module Helper
+  module Helpers
     autoload :Rails, 'dm-pagination/helpers/rails'
   end
 end

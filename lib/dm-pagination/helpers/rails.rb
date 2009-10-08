@@ -1,5 +1,5 @@
 
-module DataMapper::Pagination::Helper::Rails
+module DataMapper::Pagination::Helpers::Rails
 
   ##
   # Renders the pagination links for the given _collection_.

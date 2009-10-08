@@ -1,8 +1,8 @@
 
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe DataMapper::Pagination::Helper::Rails do
-  include DataMapper::Pagination::Helper::Rails
+describe DataMapper::Pagination::Helpers::Rails do
+  include DataMapper::Pagination::Helpers::Rails
 
   describe '#paginate' do
     before do
