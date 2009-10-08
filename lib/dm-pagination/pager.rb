@@ -63,9 +63,15 @@ module DataMapper
       @size = options.fetch :size, Pagination.defaults[:size]
       raise ArgumentError, 'invalid :size; must be an odd number' if @size % 2 == 0
       @size /= 2
-      %(<ul class="#{Pagination.defaults[:pager_class]}">) + first_link + previous_link + 
-      more(:before) + intermediate_links.join("\n") + more(:after) +
-      next_link + last_link + '</ul>'
+      [%(<ul class="#{Pagination.defaults[:pager_class]}">),
+        first_link,
+        previous_link,
+        more(:before),
+        intermediate_links.join("\n"),
+        more(:after),
+        next_link,
+        last_link,
+      '</ul>'].join
     end
     
     private
