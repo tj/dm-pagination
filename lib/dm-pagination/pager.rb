@@ -122,7 +122,7 @@ module DataMapper
     # First link.
     
     def first_link
-      previous_page ? li('first') { link_to(previous_page, Pagination.defaults[:first_text]) } : ''
+      previous_page ? li('first') { link_to(1, Pagination.defaults[:first_text]) } : ''
     end
     
     ##

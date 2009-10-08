@@ -57,7 +57,6 @@ describe DataMapper::Pager do
       
       it "should render some intermediate page links with ... after" do
         markup = Item.page.pager.to_html('/', :size => 3)
-        puts markup
         markup.should include('>1<')
         markup.should include('>2<')
         markup.should include('>3<')

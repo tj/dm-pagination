@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
-  s.authors = ["TJ Holowaychuk", "Marco Otte-Witte"]
+  s.authors = ["TJ Holowaychuk"]
   s.date = %q{2009-10-08}
   s.description = %q{DataMapper Pagination}
   s.email = %q{tj@vision-media.ca}
