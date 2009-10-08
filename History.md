@@ -1,4 +1,11 @@
 
+0.0.6 / 2009-10-08
+==================
+
+  * Added #option and specs for overriding defaults with #to_html [#13]
+  * Added "jump" class to first,last,prev,next <li>'s [#17]
+  * Added ability to configure "..." text when more pages are available
+
 0.0.5 / 2009-10-07
 ==================
 
