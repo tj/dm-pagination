@@ -18,14 +18,18 @@ module DataMapper
     #
     # === Options
     #
-    #   :per_page              Records per page; defaults to 6
-    #   :size                  Number of intermediate page number links to be shown; Defaults to 7
-    #   :pager_class           Class for the div that contains the pagination links, defaults to 'pager'
-    #   :previous_text         Text for the 'previous' link, defaults to 'Previous'
-    #   :next_text             Text for the 'next' link, defaults to 'Next'
-    #   :first_text            Text for the 'first' link, defaults to 'First'
-    #   :last_text             Text for the 'last' link, defaults to 'Last'
-    #   :more_text             Text for the 'more' indicator, defaults to '...'
+    #   :per_page       Records per page; defaults to 6
+    #   :size           Number of intermediate page number links to be shown; Defaults to 7
+    #   :pager_class    Class for the div that contains the pagination links, defaults to 'pager'
+    #   :previous_text  Text for the 'previous' link, defaults to 'Previous'
+    #   :next_text      Text for the 'next' link, defaults to 'Next'
+    #   :first_text     Text for the 'first' link, defaults to 'First'
+    #   :last_text      Text for the 'last' link, defaults to 'Last'
+    #   :more_text      Text for the 'more' indicator, defaults to '...'
+    #
+    # === Examples
+    #
+    #   DataMapper::Pagination.defaults[:size] = 5
     #
     
     def self.defaults
