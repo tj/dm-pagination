@@ -9,7 +9,7 @@ Echoe.new "dm-pager", DataMapper::Pagination::VERSION do |p|
   p.author = "TJ Holowaychuk"
   p.email = "tj@vision-media.ca"
   p.summary = "DataMapper Pagination"
-  p.url = "http://github.com/visionmedia/dm-pager"
+  p.url = "http://github.com/visionmedia/dm-pagination"
   p.runtime_dependencies = []
   p.runtime_dependencies << 'dm-core >=0.10.1'
   p.runtime_dependencies << 'dm-aggregates >=0.10.1'
