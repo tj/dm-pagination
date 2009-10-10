@@ -1,7 +1,18 @@
 
-# DataMapper::Is::Paginated
+# DataMapper::Pager
 
   Better paging solution for DataMapper for DM >= 0.10.1
+  
+# About
+
+Not to be confused with the dm-pagination gem (a similar gem lacking in functionality) dm-pager
+is a new, fresh, and feature rich pagination implementation for DataMapper. Due to Github's gem builder
+being destroyed, we were forced to rename our gem to 'dm-pager' which is now available on [Gemcutter.org](http://gemcutter.org).
+
+# Installation
+
+Install [Gemcutter](http://gemcutter.org) and execute:
+    $ sudo gem install dm-pager
   
 # Examples
 

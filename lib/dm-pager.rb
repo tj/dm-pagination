@@ -23,11 +23,11 @@
 
 require 'dm-core'
 require 'dm-aggregates'
-require 'dm-pagination/version'
-require 'dm-pagination/defaults'
-require 'dm-pagination/pagination'
-require 'dm-pagination/pager'
-require 'dm-pagination/helpers'
+require 'dm-pager/version'
+require 'dm-pager/defaults'
+require 'dm-pager/pagination'
+require 'dm-pager/pager'
+require 'dm-pager/helpers'
 
 #--
 # DataMapper

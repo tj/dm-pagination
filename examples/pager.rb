@@ -3,7 +3,7 @@ $:.unshift File.dirname(__FILE__) + '/../lib'
 
 require 'rubygems'
 require 'dm-core'
-require 'dm-pagination'
+require 'dm-pager'
 
 class Item
   include DataMapper::Resource
