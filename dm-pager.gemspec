@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dm-pager}
-  s.version = "0.0.7"
+  s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2009-10-10}
+  s.date = %q{2009-10-27}
   s.description = %q{DataMapper Pagination}
   s.email = %q{tj@vision-media.ca}
   s.extra_rdoc_files = ["lib/dm-pager.rb", "lib/dm-pager/defaults.rb", "lib/dm-pager/helpers.rb", "lib/dm-pager/helpers/rails.rb", "lib/dm-pager/pager.rb", "lib/dm-pager/pagination.rb", "lib/dm-pager/version.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake"]
-  s.files = ["History.md", "Manifest", "Rakefile", "Readme.md", "examples/pager.rb", "lib/dm-pager.rb", "lib/dm-pager/defaults.rb", "lib/dm-pager/helpers.rb", "lib/dm-pager/helpers/rails.rb", "lib/dm-pager/pager.rb", "lib/dm-pager/pagination.rb", "lib/dm-pager/version.rb", "spec/integration/rails_helper_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "spec/unit/pager_spec.rb", "spec/unit/pagination_spec.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake", "dm-pager.gemspec"]
+  s.files = ["History.md", "Manifest", "Rakefile", "Readme.md", "dm-pager.gemspec", "examples/pager.rb", "lib/dm-pager.rb", "lib/dm-pager/defaults.rb", "lib/dm-pager/helpers.rb", "lib/dm-pager/helpers/rails.rb", "lib/dm-pager/pager.rb", "lib/dm-pager/pagination.rb", "lib/dm-pager/version.rb", "spec/integration/rails_helper_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "spec/unit/pager_spec.rb", "spec/unit/pagination_spec.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake"]
   s.homepage = %q{http://github.com/visionmedia/dm-pagination}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Dm-pager", "--main", "Readme.md"]
   s.require_paths = ["lib"]

@@ -2,6 +2,7 @@ History.md
 Manifest
 Rakefile
 Readme.md
+dm-pager.gemspec
 examples/pager.rb
 lib/dm-pager.rb
 lib/dm-pager/defaults.rb
