@@ -214,6 +214,15 @@ describe DataMapper::Pager do
           markup.should include('items?foo=bar&page=1')
         end
       end
+      
+      describe "when containing other keys with 'page'" do
+        it "should append a pair" do
+          markup = Item.page.pager.to_html 'items?per_page=5'
+          markup.should include('items?per_page=5&page=1')
+          markup = Item.page.pager.to_html 'items?page=4&per_page=3'
+          markup.should include('items?page=1&per_page=3')
+        end
+      end
     end
     
   end

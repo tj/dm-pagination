@@ -183,9 +183,9 @@ module DataMapper
 
     def uri_for page
       case @uri
-      when /page=/ ; @uri.gsub /page=\d+/, "page=#{page}"
-      when /\?/    ; @uri += "&page=#{page}"
-      else         ; @uri += "?page=#{page}"
+      when /\bpage=/ ; @uri.gsub /\bpage=\d+/, "page=#{page}"
+      when /\?/      ; @uri += "&page=#{page}"
+      else           ; @uri += "?page=#{page}"
       end
     end
     
