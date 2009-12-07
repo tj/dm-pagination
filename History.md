@@ -1,4 +1,9 @@
 
+1.0.0 / 2009-12-07
+==================
+
+  * Fixes PostgresError when ordering with aggregation function count(*) [#23]
+
 0.0.8 / 2009-10-27
 ==================
 
