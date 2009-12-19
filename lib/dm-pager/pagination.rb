@@ -40,7 +40,7 @@ module DataMapper
         :offset => (page - 1) * per_page,
         :order => [:id.desc]
       }.merge(query))
-      options.delete :order
+      query.delete :order
       options.merge! :total => count(query), :page => page
       collection.pager = DataMapper::Pager.new options
       collection
