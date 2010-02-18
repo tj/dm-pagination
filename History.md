@@ -1,4 +1,9 @@
 
+1.0.2 / 2010-02-18
+==================
+
+  * Extend Pagination module into all available models
+
 1.0.1 / 2009-12-19
 ==================
 
