@@ -1,4 +1,9 @@
 
+1.1.0 / 2010-03-08
+==================
+
+  * Added ability to have multiple pagers on the same page
+
 1.0.2 / 2010-02-18
 ==================
 
