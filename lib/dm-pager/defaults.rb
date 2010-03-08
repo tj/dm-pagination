@@ -10,7 +10,8 @@ module DataMapper
       :next_text     => 'Next',
       :first_text    => 'First',
       :last_text     => 'Last',
-      :more_text     => '...'
+      :more_text     => '...',
+      :page_param    => :page
     }
 
     ##
@@ -31,7 +32,7 @@ module DataMapper
     #
     #   DataMapper::Pagination.defaults[:size] = 5
     #
-    
+
     def self.defaults
       @defaults
     end
