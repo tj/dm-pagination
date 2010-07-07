@@ -3,6 +3,7 @@ $:.unshift 'lib'
 require 'rubygems'
 require 'dm-core'
 require 'dm-pager'
+require 'dm-migrations'
 
 DataMapper.setup :default, 'sqlite3::memory:'
 

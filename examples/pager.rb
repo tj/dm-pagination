@@ -4,6 +4,7 @@ $:.unshift File.dirname(__FILE__) + '/../lib'
 require 'rubygems'
 require 'dm-core'
 require 'dm-pager'
+require 'dm-migrations'
 
 class Item
   include DataMapper::Resource
