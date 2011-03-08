@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2010-02-18}
+  s.date = %q{2011-03-08}
   s.description = %q{DataMapper Pagination}
   s.email = %q{tj@vision-media.ca}
   s.extra_rdoc_files = ["lib/dm-pager.rb", "lib/dm-pager/defaults.rb", "lib/dm-pager/helpers.rb", "lib/dm-pager/helpers/rails.rb", "lib/dm-pager/pager.rb", "lib/dm-pager/pagination.rb", "lib/dm-pager/version.rb", "tasks/docs.rake", "tasks/gemspec.rake", "tasks/spec.rake"]
