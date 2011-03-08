@@ -1,4 +1,3 @@
-
 module DataMapper
   class Pager
 
@@ -130,14 +129,14 @@ module DataMapper
     # Last link.
 
     def last_link
-      li 'last jump', link_to(total_pages, option(:last_text)) if next_page
+      li 'last jump', link_to(total_pages, option(:last_text)) if next_page && !option(:last_text).empty?
     end
 
     ##
     # First link.
 
     def first_link
-      li 'first jump', link_to(1, option(:first_text)) if previous_page
+      li 'first jump', link_to(1, option(:first_text)) if previous_page && !option(:first_text).empty?
     end
 
     ##
