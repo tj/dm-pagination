@@ -10,5 +10,4 @@ group :development do
 
   gem 'dm-migrations',      '~> 1.1.0'
   gem 'dm-sqlite-adapter',  '~> 1.1.0'
-  gem 'dm-do-adapter',      '~> 1.1.0'
 end
