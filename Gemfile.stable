@@ -1,0 +1,14 @@
+source 'http://gems.rubyforge.org'
+
+gem 'dm-core',              '~> 1.1.0'
+gem 'dm-aggregates',        '~> 1.1.0'
+
+group :development do
+  gem 'rspec',              '1.3.1'
+  gem 'echoe',              '4.5.2'
+  gem 'rake',               '~> 0.8.7'
+
+  gem 'dm-migrations',      '~> 1.1.0'
+  gem 'dm-sqlite-adapter',  '~> 1.1.0'
+  gem 'dm-do-adapter',      '~> 1.1.0'
+end
