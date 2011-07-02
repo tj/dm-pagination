@@ -11,7 +11,7 @@ module DataMapper::Pagination::Helpers::Rails
   
   def paginate collection, options = {}
     uri = url_for params.merge(options[:params] || {})
-    collection.pager.to_html(uri, options).html_safe
+    collection.pager.to_html(uri, options).to_s.html_safe
   end
 
 end
