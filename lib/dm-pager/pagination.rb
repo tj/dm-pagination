@@ -41,9 +41,7 @@ module DataMapper
       collection = new_collection scoped_query(options = {
         :limit => per_page,
         :offset => (page - 1) * per_page,
-        :order => [:id.desc]
       }.merge(query))
-      query.delete :order
       options.merge! :total => count(query), page_param => page, :page_param => page_param
       collection.pager = DataMapper::Pager.new options
       collection
