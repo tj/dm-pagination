@@ -10,7 +10,7 @@ module DataMapper::Pagination::Helpers::Rails
   #   :size    Number of intermediate page number links to be shown; Defaults to 7
   
   def paginate collection, options = {}
-    uri = @template.url_for @template.params.merge(options[:params] || {})
+    uri = controller.url_for controller.params.merge(options[:params] || {})
     collection.pager.to_html uri, options
   end
 
